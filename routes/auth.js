@@ -43,6 +43,7 @@ router.post("/signup", (req, res, next) => {
     const newUser = new User({
       username,
       password: hashPass
+      
     });
 
     newUser.save()
