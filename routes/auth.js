@@ -4,6 +4,7 @@ const router = express.Router();
 const User = require("../models/User");
 const Group = require("../models/Group")
 const Plan = require("../models/Plan")
+const bodyParser = require("body-parser")
 
 // Bcrypt to encrypt passwords
 const bcrypt = require("bcrypt");
@@ -17,7 +18,7 @@ router.get("/", (req, res, next) => {
 });
 
 router.post("/", passport.authenticate("local", {
-  successRedirect: "/profile",
+  successRedirect: "/auth/profile",
   failureRedirect: "/auth/",
   failureFlash: true,
   passReqToCallback: true
@@ -28,12 +29,9 @@ router.get("/signup", (req, res, next) => {
 });
 
 router.post("/signup", (req, res, next) => {
-  const {
-    username,
-    email,
-    password,
-    pic
-  } = req.body
+  const username = req.body.username
+  const email = req.body.email
+  const password = req.body.password;
 
   if (username === "" || password === "" || email === "") {
     res.render("auth/signup", {
@@ -41,17 +39,6 @@ router.post("/signup", (req, res, next) => {
     });
     return;
   }
-
-  // User.findOne({
-  //   email
-  // }, "email", (err, user) => {
-  //   if (email !== null) {
-  //     res.render("auth/signup", {
-  //       message: "The email already exists"
-  //     });
-  //     return;
-  //   }
-  // });
 
   User.findOne({
     username
@@ -62,22 +49,18 @@ router.post("/signup", (req, res, next) => {
       });
       return;
     }
-
-
     const salt = bcrypt.genSaltSync(bcryptSalt);
     const hashPass = bcrypt.hashSync(password, salt);
 
     const newUser = new User({
       username,
-      password: hashPass,
       email,
-      pic
-
+      password: hashPass
     });
 
     newUser.save()
       .then(() => {
-        res.redirect("/profile");
+        res.redirect("/auth/profile");
       })
       .catch(err => {
         res.render("auth/signup", {
@@ -93,7 +76,7 @@ router.get("/logout", (req, res) => {
 });
 
 router.get("/profile", (req, res, next) => {
-  User.find()
+  User.findById(req.body._id)
     .then(user =>
       res.render("auth/profile", {
         user
