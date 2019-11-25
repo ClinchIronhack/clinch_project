@@ -1,6 +1,16 @@
+<h1>{{group.name}}</h1>
+<aside>
+{{#each group.plans}}
+<h3><a href="/plan/{{_id}}">{{name}}</a></h3>
+<form action="/group/{{group._id}}" method="POST" >
+<input type="hidden" name="_id" value={{_id}}>
+<button>vote</button>
+</form>
+{{/each}}
+</aside>
+<div id="map">map</div>
 {{!-- aqui va la vista de los planes
-<h> nombre
-<a>plan * plans.length =>/plan/:idPlan
+
 + <button>vote .sort(plan.votes.length)&&highlight 1º =>/groupDetails/POST
 map
-<button> create plan => /newPlan  --}}
+<button> create plan => /plan/new-plan  --}}
