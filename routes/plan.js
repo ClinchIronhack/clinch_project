@@ -12,19 +12,34 @@ const bcryptSalt = 3;
 
 router.get("/:id", (req, res, next) => {
     Plan.findById(req.params.id)
-        .then(plan => res.json(plan))
-    // .then(plan => res.render("planDetails", {
-    //     plan
-    // }))
-    // .catch(err => console.log(err))
+        .then(plan => res.render("planDetails", {
+            plan
+        }))
+        .catch(err => console.log(err))
 })
 
-
 router.get("/new-plan", (req, res, next) => {
+    res.render("new-plan")
 })
 
 router.post("/new-plan", (req, res, next) => {
+    //     const { name, description, photo, address, coordinates } = req.body
+    //     let owner = req.user.id
+    //     Plan.create({ name, description, photo, address, coordinates, owner })
+    //         .then(newPlan => console.log(newPlan))
+    //         .catch(err => console.log(err))
+    // })
 
+    const { name, description, photo, address, coordinates } = req.body
+    let owner = req.user.id
+
+    const newPlan = new Plan({
+        name, description, photo, address, coordinates, owner
+    });
+    newPlan.save()
+        .then(createdPlan => {
+            res.redirect("group/:id")
+        }).catch((err) => console.log(err))
 })
 
 router.get("/:id/edit", (req, res, next) => {
