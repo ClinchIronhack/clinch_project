@@ -6,9 +6,10 @@ const planSchema = new Schema({
     description: String,
     photo: String,
     address: String,
+    owner: { type: Schema.Types.ObjectId, ref: 'User' },
     location: { type: { type: String }, coordinates: [Number] },
     group: { type: Schema.Types.ObjectId, ref: 'Group' },
-    votes: Number
+    votes: [{ type: Schema.Types.ObjectId, ref: 'Plan' }]
 });
 planSchema.index({ location: '2dsphere' });
 

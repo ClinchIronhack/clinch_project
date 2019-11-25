@@ -3,6 +3,9 @@ const Schema = mongoose.Schema;
 
 const groupSchema = new Schema({
     name: String,
+    dateEvent: Date,
+    dateLimit: Date,
+    owner: { type: Schema.Types.ObjectId, ref: 'User' },
     users: [{ type: Schema.Types.ObjectId, ref: 'User' }],
     plans: [{ type: Schema.Types.ObjectId, ref: 'Plan' }]
 });
