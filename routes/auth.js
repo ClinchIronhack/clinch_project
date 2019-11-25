@@ -88,10 +88,6 @@ router.get("/profile", (req, res, next) => {
 //   capturate new profile pic
 // });
 
-router.get("/profile/new-group", (req, res, next) => {
-  res.render("auth/newGroup")
-  //sera un formulario para crear plan
-});
 
 
 module.exports = router;

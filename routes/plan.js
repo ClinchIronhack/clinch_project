@@ -6,15 +6,13 @@ const Group = require("../models/Group")
 const Plan = require("../models/Plan")
 const bodyParser = require("body-parser")
 
-
-
+// Bcrypt to encrypt passwords
 const bcrypt = require("bcrypt");
 const bcryptSalt = 3;
 
 router.get("/:id", (req, res, next) => {
     Plan.findById(req.params.id)
         .then(plan => res.json(plan))
-
     // .then(plan => res.render("planDetails", {
     //     plan
     // }))

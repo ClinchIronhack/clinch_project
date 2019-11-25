@@ -24,7 +24,11 @@ const groups = [
   {
     name: 'Cumple Lola',
     users: [],
-    plans: []
+    plans: [],
+    owner: null,
+    dateEvent: null,
+    dateLimit: null
+
   }
 
 ]
@@ -36,7 +40,8 @@ const plans = [{
   address: 'Calle de San Andrés, 1, 28004 Madrid, España',
   location: { type: "Point", coordinates: [40.4255326, -3.703956] },
   group: null,
-  votes: 0
+  votes: [],
+  owner:null
 },
 
 {
@@ -46,7 +51,8 @@ const plans = [{
   address: 'Calle de Caracas, 8, 28010 Madrid, España',
   location: { type: "Point", coordinates: [40.43063, -3.694529] },
   group: null,
-  votes: 0
+  votes: [],
+  owner:null
 }]
 
 
@@ -56,14 +62,16 @@ let users = [
     password: bcrypt.hashSync("alice", bcrypt.genSaltSync(bcryptSalt)),
     email: "alice@gmail.com",
     pic: String,
-    groups: []
+    groups: [],
+    plan: []
   },
   {
     username: "bob",
     password: bcrypt.hashSync("bob", bcrypt.genSaltSync(bcryptSalt)),
     email: "bob@gmail.com",
     pic: String,
-    groups: []
+    groups: [],
+    plan: []
   }
 ]
 
