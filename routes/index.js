@@ -6,4 +6,5 @@ router.get('/', (req, res, next) => {
   res.render('auth/login');
 });
 
+
 module.exports = router;
