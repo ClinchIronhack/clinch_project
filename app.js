@@ -66,12 +66,13 @@ app.locals.title = 'CLINCH';
 
 
 // Enable authentication using session + passport
-app.use(session({
-  secret: 'irongenerator',
-  resave: true,
-  saveUninitialized: true,
-  store: new MongoStore({ mongooseConnection: mongoose.connection })
-}))
+app.use(
+  session({
+    secret: "our-passport-local-strategy-app",
+    resave: true,
+    saveUninitialized: true
+  })
+);
 app.use(flash());
 require('./passport')(app);
 
