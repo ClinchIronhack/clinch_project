@@ -8,28 +8,42 @@ const bodyParser = require("body-parser")
 const ensureLogin = require("connect-ensure-login");
 
 
-router.get("/:id", ensureLogin.ensureLoggedIn(),(req, res, next) => {
+router.get("/:id", ensureLogin.ensureLoggedIn(), (req, res, next) => {
   Group.findById(req.params.id).populate('plans')
-    .then(group =>
-      // res.json({ group }))
-      // + <button>vote .sort(plan.votes.length)&&highlight 1º 
-      res.render('event', { group }))
+    .then(group => {
+      let totalPlans = group.plans;
+      // res.json({
+      //   totalPlans
+      // })
+      res.render('event', {
+        group
+      })
+    });
 });
 
-router.post("/:id", ensureLogin.ensureLoggedIn(),(req, res, next) => {
+router.post("/:id", ensureLogin.ensureLoggedIn(), (req, res, next) => {
   let user = req.user
-  let paramsOL=req.params
-  let bodyOL= req.body
-Plan.updateOne({_id:bodyOL._id},{$push:{votes:user._id}})
+  let paramsOL = req.params
+  let bodyOL = req.body
+  Plan.updateOne({
+      _id: bodyOL._id
+    }, {
+      $push: {
+        votes: user._id
+      }
+    })
+    .then(() =>
+      Group.findById(paramsOL.id).populate('plans'))
+    .then(group => {
+      res.render('event', {
+        group
+      })
+    })
+    .catch(error => {
+      next();
+      console.log(error)
+    });
 
-// .then(() => {
-//   res.render("event",{ group });
-// })
-  .catch(error => {
-    next();
-    console.log(error)
-  });
-  
 });
 
 router.get("/new-group", (req, res, next) => {
