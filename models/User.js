@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
   username: String,
   email: String,
-  pic: String,
+  pic: { type: String, default: '../public/images/avatar.png' },
   groups: [{ type: Schema.Types.ObjectId, ref: 'Group' }],
   Plan: [{ type: Schema.Types.ObjectId, ref: 'Plan' }],
   password: String
