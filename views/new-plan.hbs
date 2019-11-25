@@ -1,0 +1,28 @@
+ADD YOUR PLAN!
+
+<a href="/">Back</a>
+
+
+
+<form method="POST" action="/group/{{groupId}}/plan/new-plan" enctype="multipart/form-data" id="form-container">
+
+    <input type="text" name="name" placeholder="Name" required>
+
+    <br><br>
+    <input type="text" name="description" placeholder="Plan description" required>
+    <br><br>
+    <input type="file" name="photo" placeholder="Photo">
+    <br><br>
+    <input type="text" name="address" valueplaceholder="Address" required>
+    <br><br>
+    <input type="hidden" id="lat" name="latitude" placeholder="Latitude">
+    <br><br>
+    <input type="hidden" id="lon" name="longitude" placeholder="Longitude">
+    <br><br>
+
+    <input type="submit" value="Add Plan">
+
+
+    <div id="map"></div>
+
+</form>

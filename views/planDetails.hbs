@@ -1,18 +1,45 @@
-<form action="/planDetails" method="POST" id="form-container">
+<a href="/plans/list">Back</a>
 
-    <input id="name" type="text" name="name" placeholder="Plan name">
-    <br><br>
-    <input id="description" type="text" name="password" placeholder="Description plan">
-    <br>
-    <input id="Direction" type="text" name="direction" placeholder="Direction">
-    <br>
-    creador??????
-    votos????????
-    mapa?????????
+<br><br>
+<br><br>
+<br><br>
 
-    {{#if message }}
-    <div class="error-message">{{ message }}</div>
-    {{/if}}
 
-    <br><br>
-</form>
+
+
+
+DETAILS PLAN
+
+<br><br>
+
+
+
+Owner :{{user.id}}
+<br><br>
+
+Name : {{plan.name}}
+
+<br><br>
+
+Reasons why I propose this plan : {{plan.description}}
+
+<br><br>
+
+Where : {{plan.location}}
+
+<br><br>
+
+Votes : {{plan.votes}}
+
+<br><br>
+
+<a class="plan-bottom-2 col-sm-6" href="/plans/<%=plan.id%>/in"> I´m in! </a>
+
+<br><br>
+
+<img class="plan-image" src="<%= plan.picPath %>">
+
+<br><br>
+
+
+<div id="map"></div>
