@@ -41,7 +41,7 @@ router.post("/signup", (req, res, next) => {
     });
     return;
   }
-  
+
   // User.findOne({
   //   email
   // }, "email", (err, user) => {
@@ -94,7 +94,7 @@ router.get("/logout", (req, res) => {
 
 router.get("/profile", (req, res, next) => {
   User.find()
-    .then(user => 
+    .then(user =>
       res.render("auth/profile", {
         user
       })
@@ -106,8 +106,8 @@ router.get("/profile", (req, res, next) => {
 // });
 
 router.get("/profile/new-group", (req, res, next) => {
-      res.render("auth/newGroup")
-      //sera un formulario para crear plan
+  res.render("auth/newGroup")
+  //sera un formulario para crear plan
 });
 
 

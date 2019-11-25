@@ -15,3 +15,4 @@ planSchema.index({ location: '2dsphere' });
 
 const Plan = mongoose.model('Plan', planSchema);
 module.exports = Plan;
+
