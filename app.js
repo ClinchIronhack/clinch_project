@@ -85,9 +85,6 @@ app.use('/auth', authRoutes);
 const groupsRoutes = require('./routes/group');
 app.use('/group', groupsRoutes);
 
-const groupsRoutes = require('./routes/group');
-app.use('/group', groupsRoutes);
-
 const planRoutes = require('./routes/plan');
 app.use('/plan', planRoutes);
 
