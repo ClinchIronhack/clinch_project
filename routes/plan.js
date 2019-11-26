@@ -116,11 +116,11 @@ router.post("/:planId/edit", (req, res, next) => {
 //         .catch(err => console.log(err))
 // })
 
-router.get("/:planId/delete", (req, res, next) => {
-    let planId = req.params.planId
-    let groupId = req.params.id
-    Plan.findByIdAndDelete(planId)
-        .then(() => res.redirect(`/group/${groupId}`))
-        .catch(err => console.log(err))
-})
+// router.post("/:planId/delete", (req, res, next) => {
+//     let planId = req.params.planId
+//     let groupId = req.params.id
+//     Plan.findByIdAndDelete(planId)
+//         .then(() => res.redirect(`/group/${req.params.id}`))
+//         .catch(err => console.log(err))
+// })
 module.exports = router;
