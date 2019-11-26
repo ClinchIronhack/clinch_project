@@ -8,11 +8,13 @@ const bodyParser = require("body-parser")
 const ensureLogin = require("connect-ensure-login");
 const planRouter = require('./plan')
 
-router.get("/new-group", ensureLogin.ensureLoggedIn(), (req, res, next) => {
-  res.render('newGroup');
+router.get("/new", ensureLogin.ensureLoggedIn(), (req, res, next) => {
+  res.render('createEvent');
 });
 
-router.post("/new-group", ensureLogin.ensureLoggedIn(), (req, res, next) => {
+router.post("/new", ensureLogin.ensureLoggedIn(), (req, res, next) => {
+  let data = req.body
+  res.json(data)
   /*Group.create(req.body)
 res.redirect ('/auth/profile') */
 });

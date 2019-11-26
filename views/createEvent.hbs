@@ -1,7 +1,32 @@
-<option>Select An Image</option>
+<div>
+  <form action="/group/new" method="POST">
+  <label for="name">Qué plan tienes en mente?
+    <input id="name" type="text" name="name" placeholder="Qué plan tienes en mente?">
+</label>
+<select name="pic" id="pic">
+<option>Elige una imagen para tu idea</option>
     <option value="birthday-party.jpg" data-style="background-image: url('../../public/images/birthday-party.jpg');"></option>
     <option value="brunch.jpg" data-style="background-image: url('../../public/images/brunch.jpg');"></option>
     <option value="drinks.jpg" data-style="background-image: url('../../public/images/drinks.jpg');"></option>
     <option value="lunch.jpg" data-style="background-image: url('../../public/images/lunch.jpg');"></option>
     <option value="vacations.jpg" data-style="background-image: url('../../public/images/vacations.jpg');"></option>
   </select>
+
+    <label for="dateEvent"> Cuando propones hacerlo?</p> 
+    <input type="text" name="dateEvent" placeholder="DD-MM-YYYY" required 
+pattern="(?:(?:0[13578]|1[02])-31))|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])" 
+title="DD-MM-YYYY"/>
+</label>
+<label for="">Se vota hasta
+    <input type="text" name="dateLimit" placeholder="DD-MM-YYYY" required 
+pattern="(?:(?:0[13578]|1[02])-31))|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])" 
+title="DD-MM-YYYY"/>
+</label>
+
+
+
+
+
+    <button>Crear</button>
+  </form>
+</div>

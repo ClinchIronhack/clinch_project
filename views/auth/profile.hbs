@@ -1,6 +1,11 @@
-{{!-- {{#each user.groups}}
-{{> groupCard}}
-{{/each}} --}}
+{{#each data}}
+<div class="groupDescription">
+  {{!-- <select name="event_pic" id="event_pic"> --}}
+    
+  <h2><a href="">{{name}}</a></h2>
+  {{!-- <p>{{user.groups.dateEvent}}</p> --}}
+</div>
+{{/each}}
 
 <a href="/group/new">Crear Evento</a> 
 <a href="/auth/logout">Logout</a>

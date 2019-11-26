@@ -76,11 +76,14 @@ router.get("/logout", (req, res) => {
 });
 
 router.get("/profile", (req, res, next) => {
-  User.findById(req.body._id)
+  User.findById(req.user._id).populate('groups')
     .then(user =>
+    {let data = user.groups;
+      // res.json(data)}
       res.render("auth/profile", {
-        user
+        data
       })
+    }
     );
 });
 
