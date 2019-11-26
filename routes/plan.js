@@ -120,7 +120,7 @@ router.post("/:planId/edit", (req, res, next) => {
 //     let planId = req.params.planId
 //     let groupId = req.params.id
 //     Plan.findByIdAndDelete(planId)
-//         .then(() => res.redirect(`/group/${req.params.id}`))
+//         .then(() => res.redirect(`/group/${_id:req.params.id}`))
 //         .catch(err => console.log(err))
 // })
 module.exports = router;
