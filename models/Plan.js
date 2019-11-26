@@ -9,7 +9,7 @@ const planSchema = new Schema({
     owner: { type: Schema.Types.ObjectId, ref: 'User' },
     location: { type: { type: String }, coordinates: [Number] },
     group: { type: Schema.Types.ObjectId, ref: 'Group' },
-    votes: [{ type: Schema.Types.ObjectId, ref: 'Plan' }]
+    votes: [{ type: Schema.Types.ObjectId, ref: 'User' }]
 });
 planSchema.index({ location: '2dsphere' });
 
