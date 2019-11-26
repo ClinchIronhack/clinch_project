@@ -17,24 +17,16 @@ res.redirect ('/auth/profile') */
 });
 
 
-router.get("/:id",
-  ensureLogin.ensureLoggedIn(),
-  (req, res, next) => {
-    Group.findById(req.params.id).populate('plans')
-      .then(group => {
-        // let totalPlans = group.plans;
-        // res.json({
-        //   totalPlans
-        // })
-        res.render('event', {
-          group
-        })
-      });
-  });
+router.get("/:id", ensureLogin.ensureLoggedIn(), (req, res, next) => {
+  Group.findById(req.params.id).populate('plans')
+    .then(group => {
+      res.render('event', {
+        group
+      })
+    });
+});
 
-//ensureLogin.ensureLoggedIn(),
-
-router.post("/:_id", (req, res, next) => {
+router.post("/:_id", ensureLogin.ensureLoggedIn(), (req, res, next) => {
   let user = req.user
   let paramsOL = req.params
   let bodyOL = req.body
@@ -48,30 +40,23 @@ router.post("/:_id", (req, res, next) => {
       }
     })
     .then(group => {
-      console.log("A")
-      console.log(group)
-      console.log("////////////")
-      // console.log(group.plans.length)
-
       if (group !== null && group.plans.length > 0) {
-        console.log("A1")
         let planId = group.plans[0]._id;
         return Plan.findByIdAndUpdate({
-          _id: planId
-        }, {
-          $pull: {
-            votes: user._id
-          }
-        })
-       .then(() => Plan.updateOne({
-          _id: bodyOL._id
-        }, {
-          $push: {
-            votes: user._id
-          }
-        }))
+            _id: planId
+          }, {
+            $pull: {
+              votes: user._id
+            }
+          })
+          .then(() => Plan.updateOne({
+            _id: bodyOL._id
+          }, {
+            $push: {
+              votes: user._id
+            }
+          }))
       } else {
-        console.log("B1")
         return Plan.updateOne({
           _id: bodyOL._id
         }, {
@@ -81,10 +66,10 @@ router.post("/:_id", (req, res, next) => {
         })
       }
     })
-    .then( ()=>
+    .then(() =>
       res.redirect(`/group/${req.params._id}`)
     )
-   
+
 });
 
 
