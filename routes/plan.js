@@ -21,6 +21,7 @@ router.post("/new-plan", (req, res, next) => {
     const owner = req.user ? req.user._id : null
     const latitude = req.body.latitude
     const longitude = req.body.longitude
+    const group = req.params.id
 
     const location = {
         type: "Point",
@@ -55,34 +56,6 @@ router.post("/new-plan", (req, res, next) => {
     //     return;
     // }
 
-    // const newPlan = Plan({
-    //     name: name,
-    //     description: description,
-    //     address: address,
-    //     owner: req.user._id,
-    //     picPath: `/uploads/${req.file.filename}`,
-    //     picName: req.file.originalname,
-    //     location: {
-    //         type: "Point",
-    //         coordinates: [req.body.latitude, req.body.longitude]
-    //     }
-    // });
-
-    // newPlan.save((err) => {
-    //     if (err) {
-    //         res.render("new-plan", {
-    //             message: "Something went wrong",
-    //             types: TYPES
-    //         });
-    //     } else {
-    //         console.log(req.user);
-    //         console.log("ping");
-    //         res.redirect("/group/:id");
-    //     }
-    // });
-
-
-
     const newPlan = new Plan({
         name, description, address, location, owner
     });
@@ -116,7 +89,7 @@ router.get("/:planId/edit", (req, res, next) => {
     console.log(planId)
     Plan.findById(planId)
         .then(plan => {
-            console.log(plan)
+            // console.log(plan)
             res.render("edit-plan", {
                 groupId,
                 plan
@@ -127,16 +100,27 @@ router.get("/:planId/edit", (req, res, next) => {
 
 router.post("/:planId/edit", (req, res, next) => {
     const { name, description, address } = req.body
-    Plan.findByIdAndUpdate(req.params.planId, { name, description, address })
+    const owner = req.user.id
+    Plan.findByIdAndUpdate(req.params.planId, { name, description, address, owner })
         .then(() => res.redirect(`/group/${req.params.id}`))
         .catch(err => console.log(err))
 })
 
 
-router.post("/:id/delete", (req, res, next) => {
-    Coaster.findByIdAndDelete(req.query.id)
-        .then(() => res.redirect(`/group/${req.query.id}`))
+// router.post("/:planId/delete", (req, res, next) => {
+//     let planId = req.params.planId
+//     const owner = req.user.id
+//     const { name, description, address } = req.body
+//     Plan.findByIdAndDelete(req.params.planId, { name, description, address, owner })
+//         .then(() => res.redirect(`/group/${req.params.id}`))
+//         .catch(err => console.log(err))
+// })
+
+router.get("/:planId/delete", (req, res, next) => {
+    let planId = req.params.planId
+    let groupId = req.params.id
+    Plan.findByIdAndDelete(planId)
+        .then(() => res.redirect(`/group/${groupId}`))
         .catch(err => console.log(err))
 })
-
 module.exports = router;
