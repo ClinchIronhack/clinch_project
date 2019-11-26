@@ -4,25 +4,30 @@ ADD YOUR PLAN!
 
 
 
-<form method="POST" action="/group/{{groupId}}/plan/new-plan" enctype="multipart/form-data" id="form-container">
+<form method="POST" action="/group/{{groupId}}/plan/new-plan" id="form-container">
 
     <input type="text" name="name" placeholder="Name" required>
-
     <br><br>
     <input type="text" name="description" placeholder="Plan description" required>
     <br><br>
     <input type="file" name="photo" placeholder="Photo">
     <br><br>
-    <input type="text" name="address" valueplaceholder="Address" required>
+    <input id="address" type="text" name="address" valueplaceholder="Address" required>
     <br><br>
+    <input type="button" id="getPos" value="Show position">
     <input type="hidden" id="lat" name="latitude" placeholder="Latitude">
     <br><br>
     <input type="hidden" id="lon" name="longitude" placeholder="Longitude">
     <br><br>
 
-    <input type="submit" value="Add Plan">
+    <button type="submit">Add Plan</button>
 
-
-    <div id="map"></div>
 
 </form>
+
+<div id="map" style="height: 30vh;"></div>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJpW1K8r7jliI-iXFBr3CaNs50FTih7MI"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/javascripts/newPlan.js"></script>

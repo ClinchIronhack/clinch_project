@@ -1,6 +1,6 @@
 UPDATE PLAN
 
-<form action="/group/:id" method="POST" id="form-container">
+<form action="/group/{{groupId}}/plan/{{plan._id}}/edit" method="POST" id="form-container">
 
     <input id="name" type="text" name="name" placeholder="Plan name" value="{{plan.name}}">
     <br><br>
@@ -10,12 +10,11 @@ UPDATE PLAN
     <br><br>
     <input id="address" type="text" name="address" placeholder="Address" value="{{plan.address}}">
     <br><br>
-    <input id="direction" type="text" name="direction" placeholder="Direction" value="{{plan.direction}}">
-    <br><br>
     <input id="coordinates" type="text" name="coordinates" placeholder="Coordinates" value="{{plan.coordinates}}">
     <br><br>
     <input id="owner" type="text" name="owner" placeholder="Owner">
     <br><br>
 
+    <button type='submit'> Update Plan</button>
 
-    <button>Update Plan</button>
+</form>

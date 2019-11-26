@@ -1,8 +1,6 @@
 const express = require("express");
 const passport = require('passport');
 const router = express.Router({ mergeParams: true });
-const User = require("../models/User");
-const Group = require("../models/Group")
 const Plan = require("../models/Plan")
 const bodyParser = require("body-parser")
 
@@ -16,13 +14,25 @@ router.get("/new-plan", (req, res, next) => {
 })
 
 router.post("/new-plan", (req, res, next) => {
-    // const name = req.body.name;
-    // const description = req.body.description;
-    // const photo = req.body.photo;
-    // const address = req.body.address;
-    // const location = req.body.location;
-    // const latitude = req.body.latitude;
-    // const longitude = req.body.longitude;
+    //console.log(req.body)
+    const name = req.body.name;
+    const description = req.body.description;
+    const address = req.body.address;
+    const owner = req.user ? req.user._id : null
+    const latitude = req.body.latitude
+    const longitude = req.body.longitude
+
+    const location = {
+        type: "Point",
+        coordinates: [40.23, -3.24]
+        //     [req.body.latitude, req.body.longitude]
+    }
+
+    console.log('Name:' + name)
+    console.log('description:' + description)
+    console.log('address:' + address)
+    console.log('owner:' + name)
+    //const photo = req.body.photo;
 
     // if (name === "" || description === "" || address === "" || location === "") {
     //     res.render("new-plan", {
@@ -71,24 +81,17 @@ router.post("/new-plan", (req, res, next) => {
     //     }
     // });
 
-    const { name, description, photo, address } = req.body
-    let owner = req.user.id
-    let location = {
-        type: "Point",
-        coordinates: [40.23, -3.24]
-        //     [req.body.latitude, req.body.longitude]
-    }
 
 
     const newPlan = new Plan({
-        name, description, photo, address, location, owner
+        name, description, address, location, owner
     });
 
     console.log(newPlan)
     newPlan.save()
         .then(createdPlan => {
             console.log(createdPlan)
-            res.redirect("group/" + req.params.id)
+            res.redirect(`/group/${req.params.id}`)
         }).catch((err) => console.log(err))
 })
 
@@ -106,17 +109,34 @@ router.get("/:id", (req, res, next) => {
 })
 
 
-
-router.get("/:id/edit", (req, res, next) => {
-    res.render('edit-plan')
+router.get("/:planId/edit", (req, res, next) => {
+    let groupId = req.params.id
+    let planId = req.params.planId
+    console.log(groupId)
+    console.log(planId)
+    Plan.findById(planId)
+        .then(plan => {
+            console.log(plan)
+            res.render("edit-plan", {
+                groupId,
+                plan
+            })
+        })
+        .catch(err => console.log(err))
 })
 
-router.post("/:id/edit", (req, res, next) => {
-
+router.post("/:planId/edit", (req, res, next) => {
+    const { name, description, address } = req.body
+    Plan.findByIdAndUpdate(req.params.planId, { name, description, address })
+        .then(() => res.redirect(`/group/${req.params.id}`))
+        .catch(err => console.log(err))
 })
+
 
 router.post("/:id/delete", (req, res, next) => {
-
+    Coaster.findByIdAndDelete(req.query.id)
+        .then(() => res.redirect(`/group/${req.query.id}`))
+        .catch(err => console.log(err))
 })
 
 module.exports = router;
