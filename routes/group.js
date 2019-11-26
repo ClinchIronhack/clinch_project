@@ -34,12 +34,12 @@ router.get("/:id",
 
 //ensureLogin.ensureLoggedIn(),
 
-router.post("/:id", (req, res, next) => {
+router.post("/:_id", (req, res, next) => {
   let user = req.user
   let paramsOL = req.params
   let bodyOL = req.body
 
-  Group.findById(paramsOL.id).populate({
+  Group.findById(paramsOL._id).populate({
       path: 'plans',
       match: {
         votes: {
@@ -48,85 +48,43 @@ router.post("/:id", (req, res, next) => {
       }
     })
     .then(group => {
-      if (group.plans.length > 0) {
+      console.log("A")
+      console.log(group)
+      console.log("////////////")
+      // console.log(group.plans.length)
+
+      if (group !== null && group.plans.length > 0) {
+        console.log("A1")
         let planId = group.plans[0]._id;
-        console.log(planId)
-        // if(planId) {
-        //   console.log(true)
         return Plan.findByIdAndUpdate({
           _id: planId
         }, {
           $pull: {
-            votes: req.user._id
+            votes: user._id
           }
-        }).then(() => Plan.updateOne({
+        })
+       .then(() => Plan.updateOne({
           _id: bodyOL._id
         }, {
           $push: {
             votes: user._id
           }
-        }).then(newPlan => {
-          console.log(newPlan)
         }))
       } else {
-
+        console.log("B1")
         return Plan.updateOne({
           _id: bodyOL._id
         }, {
           $push: {
             votes: user._id
           }
-        }).then(newPlan => {
-          console.log(newPlan)
         })
       }
-
     })
     .then( ()=>
-    res.redirect(`/group/${req.params.id}`)
+      res.redirect(`/group/${req.params._id}`)
     )
-    // .then(group => {
-
-    //   group.plans
-    //   .forEach(element => {
-    //     console.log(element.votes.filter(filtered => filtered ===req.user._id))
-    //   });
-
-
-
-    //   Plan.findOne([
-    //     {
-    //        $project: {
-    //           votes: {
-    //              $filter: {
-    //                 input: "$votes",
-    //                 as: "vote",
-    //                 cond: { $eq: [ "$item", user ] }
-    //              }
-    //           }
-    //        }
-    //     }
-    //  ])
-    // group.plans.find({ votes: user._id})
-    //   .then(group => res.json({
-    //     group
-    //   }))
-
-
-    // .then(() =>
-    //   Group.findById(paramsOL.id).populate('plans'))
-    // .then(group => {
-    //   // res.render('event', {
-    //   group
-    // })
-  // })
-  // .catch(error => {
-  //   next();
-  //   console.log(error)
-
-  // });
-  // });
-
+   
 });
 
 
