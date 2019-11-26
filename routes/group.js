@@ -8,17 +8,19 @@ const bodyParser = require("body-parser")
 const ensureLogin = require("connect-ensure-login");
 const planRouter = require('./plan')
 
-router.get("/new-group", ensureLogin.ensureLoggedIn(), (req, res, next) => {
+router.use('/:id/plan', planRouter);
+
+router.get("/new-group", ensureLogin.ensureLoggedIn("auth/login"), (req, res, next) => {
   res.render('newGroup');
 });
 
-router.post("/new-group", ensureLogin.ensureLoggedIn(), (req, res, next) => {
+router.post("/new-group", ensureLogin.ensureLoggedIn("auth/login"), (req, res, next) => {
   /*Group.create(req.body)
 res.redirect ('/auth/profile') */
 });
 
 
-router.get("/:id", ensureLogin.ensureLoggedIn(), (req, res, next) => {
+router.get("/:id", ensureLogin.ensureLoggedIn("auth/login"), (req, res, next) => {
   Group.findById(req.params.id).populate('plans')
     .then(group => {
       res.render('event', {
@@ -27,7 +29,7 @@ router.get("/:id", ensureLogin.ensureLoggedIn(), (req, res, next) => {
     });
 });
 
-router.post("/:_id", ensureLogin.ensureLoggedIn(), (req, res, next) => {
+router.post("/:_id", ensureLogin.ensureLoggedIn("auth/login"), (req, res, next) => {
   let user = req.user
   let paramsOL = req.params
   let bodyOL = req.body
@@ -44,12 +46,12 @@ router.post("/:_id", ensureLogin.ensureLoggedIn(), (req, res, next) => {
       if (group !== null && group.plans.length > 0) {
         let planId = group.plans[0]._id;
         return Plan.findByIdAndUpdate({
-            _id: planId
-          }, {
-            $pull: {
-              votes: user._id
-            }
-          })
+          _id: planId
+        }, {
+          $pull: {
+            votes: user._id
+          }
+        })
           .then(() => Plan.updateOne({
             _id: bodyOL._id
           }, {

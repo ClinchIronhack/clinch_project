@@ -1,21 +1,21 @@
-<form action="/auth/" method="POST" id="form-container">
-  
+<form action="/auth/login" method="POST" id="form-container">
+
   <input id="username" type="text" name="username" placeholder="username">
 
   <br><br>
 
-  
+
   <input id="password" type="password" name="password" placeholder="password">
   <br>
 
   {{#if message }}
-    <div class="error-message">{{ message }}</div>
+  <div class="error-message">{{ message }}</div>
   {{/if}}
 
   <br><br>
 
   <button>Log In</button>
- 
- <a href="/auth/signup">Not a member yet? Sign Up here</a>
-  
+
+  <a href="/auth/signup">Not a member yet? Sign Up here</a>
+
 </form>

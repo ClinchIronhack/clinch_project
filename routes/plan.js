@@ -69,9 +69,9 @@ router.post("/new-plan", (req, res, next) => {
 })
 
 
-router.get("/:id", (req, res, next) => {
-
-    Plan.findById(req.params.id)
+router.get("/:planId", (req, res, next) => {
+    let planId = req.params.planId
+    Plan.findById(planId)
         .then(plan => {
             console.log(plan)
             res.render("planDetails", {
@@ -83,7 +83,7 @@ router.get("/:id", (req, res, next) => {
 
 
 router.get("/:planId/edit", (req, res, next) => {
-    let groupId = req.params.id
+    let groupId = req.params.groupId
     let planId = req.params.planId
     console.log(groupId)
     console.log(planId)
@@ -102,7 +102,7 @@ router.post("/:planId/edit", (req, res, next) => {
     const { name, description, address } = req.body
     const owner = req.user.id
     Plan.findByIdAndUpdate(req.params.planId, { name, description, address, owner })
-        .then(() => res.redirect(`/group/${req.params.id}`))
+        .then(() => res.redirect(`/group/${req.params.groupId}`))
         .catch(err => console.log(err))
 })
 
@@ -116,11 +116,14 @@ router.post("/:planId/edit", (req, res, next) => {
 //         .catch(err => console.log(err))
 // })
 
-// router.post("/:planId/delete", (req, res, next) => {
-//     let planId = req.params.planId
-//     let groupId = req.params.id
-//     Plan.findByIdAndDelete(planId)
-//         .then(() => res.redirect(`/group/${_id:req.params.id}`))
-//         .catch(err => console.log(err))
-// })
+router.get("/:planId/delete", (req, res, next) => {
+    let planId = req.params.planId
+    let groupId = req.params.id
+    console.log(groupId)
+    Plan.findByIdAndDelete(planId)
+        .then(() => res.redirect(`/group/${groupId}`))
+        .catch(err => console.log(err))
+})
+
+
 module.exports = router;

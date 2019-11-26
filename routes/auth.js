@@ -11,18 +11,25 @@ const bcrypt = require("bcrypt");
 const bcryptSalt = 3;
 
 
-router.get("/", (req, res, next) => {
+router.get("/login", (req, res, next) => {
   res.render("auth/login", {
     "message": req.flash("error")
   });
 });
 
-router.post("/", passport.authenticate("local", {
-  successRedirect: "/auth/profile",
-  failureRedirect: "/",
+router.post("/login", passport.authenticate("local", {
+  successRedirect: "/auth/login",
+  failureRedirect: "/auth/login",
   failureFlash: true,
   passReqToCallback: true
 }));
+
+// router.post("/", passport.authenticate("local", {
+//   successRedirect: "/auth/profile",
+//   failureRedirect: "/",
+//   failureFlash: true,
+//   passReqToCallback: true
+// }));
 
 router.get("/signup", (req, res, next) => {
   res.render("auth/signup");
@@ -75,14 +82,14 @@ router.get("/logout", (req, res) => {
   res.redirect("/");
 });
 
-router.get("/profile", (req, res, next) => {
-  User.findById(req.body._id)
-    .then(user =>
-      res.render("auth/profile", {
-        user
-      })
-    );
-});
+// router.get("/profile", (req, res, next) => {
+//   User.findById(req.body._id)
+//     .then(user =>
+//       res.render("auth/profile", {
+//         user
+//       })
+//     );
+// });
 
 // router.post("/profile", (req, res) => {
 //   capturate new profile pic
