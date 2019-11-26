@@ -47,16 +47,12 @@ router.post("/:id", ensureLogin.ensureLoggedIn(), (req, res, next) => {
 });
 
 router.get("/new-group", (req, res, next) => {
-  /*<form>Group
-nombre
-fecha evento
-fecha limite grupo
-<button> grupo => /createGroup/POST */
+  res.render('newGroup')
 });
 
 router.post("/new-group", (req, res, next) => {
   /*Group.create()
-redirect => auth/profile/GET */
+res.redirect ('/auth/profile') */
 });
 
 

@@ -19,7 +19,7 @@ router.get("/", (req, res, next) => {
 
 router.post("/", passport.authenticate("local", {
   successRedirect: "/auth/profile",
-  failureRedirect: "/auth/",
+  failureRedirect: "/",
   failureFlash: true,
   passReqToCallback: true
 }));
@@ -87,6 +87,7 @@ router.get("/profile", (req, res, next) => {
 // router.post("/profile", (req, res) => {
 //   capturate new profile pic
 // });
+
 
 
 
