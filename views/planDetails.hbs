@@ -1,18 +1,49 @@
-<form action="/planDetails" method="POST" id="form-container">
+<a href="/plans/list">Back</a>
+<br><br>
+<br><br>
+<br><br>
 
-    <input id="name" type="text" name="name" placeholder="Plan name">
-    <br><br>
-    <input id="description" type="text" name="password" placeholder="Description plan">
-    <br>
-    <input id="Direction" type="text" name="direction" placeholder="Direction">
-    <br>
-    creador??????
-    votos????????
-    mapa?????????
+DETAILS PLAN
 
-    {{#if message }}
-    <div class="error-message">{{ message }}</div>
-    {{/if}}
+<br><br>
 
-    <br><br>
-</form>
+Owner :{{user.id}}
+<br><br>
+
+Name : {{plan.name}}
+
+<br><br>
+
+Reasons why I propose this plan : {{plan.description}}
+
+<br><br>
+
+Where : {{plan.location}}
+
+<br><br>
+
+
+Votes : {{plan.votes}}
+
+<br><br>
+
+<a class="plan-bottom-2 col-sm-6" href="/plans/<%=plan.id%>/in"> I´m in! </a>
+
+<br><br>
+
+{{!-- <img class="plan-image" src="<%= plan.picPath %>"> --}}
+
+<br><br>
+<form action=""></form>
+<input type="button" id="getPos" value="Show position">
+<br><br>
+
+<a href="/plan/{{plan._id}}/delete"> <button type="submit">Delete Plan</button></a>
+
+
+
+<div id="map"></div>
+<script src="https://maps.googleapis.com/maps/api/js?key=" + process.env.API_KEY></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/javascripts/newPlan.js"></script>

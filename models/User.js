@@ -7,7 +7,8 @@ const userSchema = new Schema({
   pic: { type: String, default: '../public/images/avatar.png' },
   groups: [{ type: Schema.Types.ObjectId, ref: 'Group' }],
   plan: [{ type: Schema.Types.ObjectId, ref: 'Plan' }],
-  password: String
+  password: String,
+  // timestamps: true
 })
 
 const User = mongoose.model('User', userSchema);

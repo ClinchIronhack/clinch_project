@@ -6,6 +6,7 @@ const Group = require("../models/Group")
 const Plan = require("../models/Plan")
 const bodyParser = require("body-parser")
 const ensureLogin = require("connect-ensure-login");
+const planRouter = require('./plan')
 
 router.get("/new-group", ensureLogin.ensureLoggedIn(), (req, res, next) => {
   res.render('newGroup');
@@ -32,13 +33,13 @@ router.post("/:_id", ensureLogin.ensureLoggedIn(), (req, res, next) => {
   let bodyOL = req.body
 
   Group.findById(paramsOL._id).populate({
-      path: 'plans',
-      match: {
-        votes: {
-          $eq: user._id
-        }
+    path: 'plans',
+    match: {
+      votes: {
+        $eq: user._id
       }
-    })
+    }
+  })
     .then(group => {
       if (group !== null && group.plans.length > 0) {
         let planId = group.plans[0]._id;
