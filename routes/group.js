@@ -6,6 +6,7 @@ const Group = require("../models/Group")
 const Plan = require("../models/Plan")
 const bodyParser = require("body-parser")
 const ensureLogin = require("connect-ensure-login");
+const planRouter = require('./plan')
 
 router.get("/new-group", ensureLogin.ensureLoggedIn(), (req, res, next) => {
   res.render('newGroup');
@@ -40,13 +41,13 @@ router.post("/:_id", (req, res, next) => {
   let bodyOL = req.body
 
   Group.findById(paramsOL._id).populate({
-      path: 'plans',
-      match: {
-        votes: {
-          $eq: user._id
-        }
+    path: 'plans',
+    match: {
+      votes: {
+        $eq: user._id
       }
-    })
+    }
+  })
     .then(group => {
       console.log("A")
       console.log(group)
@@ -63,13 +64,13 @@ router.post("/:_id", (req, res, next) => {
             votes: user._id
           }
         })
-       .then(() => Plan.updateOne({
-          _id: bodyOL._id
-        }, {
-          $push: {
-            votes: user._id
-          }
-        }))
+          .then(() => Plan.updateOne({
+            _id: bodyOL._id
+          }, {
+            $push: {
+              votes: user._id
+            }
+          }))
       } else {
         console.log("B1")
         return Plan.updateOne({
@@ -81,10 +82,10 @@ router.post("/:_id", (req, res, next) => {
         })
       }
     })
-    .then( ()=>
+    .then(() =>
       res.redirect(`/group/${req.params._id}`)
     )
-   
+
 });
 
 

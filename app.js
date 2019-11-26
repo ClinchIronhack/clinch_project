@@ -30,6 +30,12 @@ const app = express();
 
 // Middleware Setup
 app.use(logger('dev'));
+app.use(function (req, res, next) {
+  if (req.headers['content-type'] === 'application/json;') {
+    req.headers['content-type'] = 'application/json';
+  }
+  next();
+});
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -61,7 +67,7 @@ hbs.registerHelper('ifUndefined', (value, options) => {
 });
 
 
-// default value for title local
+
 app.locals.title = 'CLINCH';
 
 
