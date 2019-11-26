@@ -5,6 +5,7 @@ const User = require("../models/User");
 const Group = require("../models/Group")
 const Plan = require("../models/Plan")
 const bodyParser = require("body-parser")
+const ensureLogin = require("connect-ensure-login");
 
 // Bcrypt to encrypt passwords
 const bcrypt = require("bcrypt");
@@ -75,11 +76,10 @@ router.get("/logout", (req, res) => {
   res.redirect("/");
 });
 
-router.get("/profile", (req, res, next) => {
+router.get("/profile", ensureLogin.ensureLoggedIn(),(req, res, next) => {
   User.findById(req.user._id).populate('groups')
     .then(user =>
     {let data = user.groups;
-      // res.json(data)}
       res.render("auth/profile", {
         data
       })

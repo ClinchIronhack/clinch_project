@@ -13,10 +13,21 @@ router.get("/new", ensureLogin.ensureLoggedIn(), (req, res, next) => {
 });
 
 router.post("/new", ensureLogin.ensureLoggedIn(), (req, res, next) => {
-  let data = req.body
-  res.json(data)
-  /*Group.create(req.body)
-res.redirect ('/auth/profile') */
+  Group.create(req.body)
+    .then((group) => {
+      console.log(group._id)
+      console.log(req.user._id)
+      User.findByIdAndUpdate({
+        _id: req.user._id
+      }, {
+        $push: {
+          groups: group._id
+        }
+      })
+      console.log('a')
+    })
+    .then(() => res.redirect('/auth/profile'))
+
 });
 
 
@@ -35,13 +46,13 @@ router.post("/:_id", ensureLogin.ensureLoggedIn(), (req, res, next) => {
   let bodyOL = req.body
 
   Group.findById(paramsOL._id).populate({
-    path: 'plans',
-    match: {
-      votes: {
-        $eq: user._id
+      path: 'plans',
+      match: {
+        votes: {
+          $eq: user._id
+        }
       }
-    }
-  })
+    })
     .then(group => {
       if (group !== null && group.plans.length > 0) {
         let planId = group.plans[0]._id;
