@@ -5,14 +5,14 @@
     </label>
     <br><br>
 
-    <select name="pic" id="pic">
+    <select name="image" id="pic">
       <option>Pick a theme</option>
-      <option value="birthday-party.jpg" data-style="background-image: url('../../public/images/birthday-party.jpg');">
+      <option value="https://res.cloudinary.com/flor-i-ronhack/image/upload/v1574875141/clinch/birthday-party.jpg">
         Birthday</option>
-      <option value="brunch.jpg" data-style="background-image: url('../../public/images/brunch.jpg');">Brunch</option>
-      <option value="drinks.jpg" data-style="background-image: url('../../public/images/drinks.jpg');">Drinks</option>
-      <option value="lunch.jpg" data-style="background-image: url('../../public/images/lunch.jpg');">Lunch</option>
-      <option value="vacations.jpg" data-style="background-image: url('../../public/images/vacations.jpg');">Vacations
+      <option value="https://res.cloudinary.com/flor-i-ronhack/image/upload/v1574875142/clinch/brunch.jpg">Brunch</option>
+      <option value="https://res.cloudinary.com/flor-i-ronhack/image/upload/v1574875141/clinch/cocktails.jpg">Drinks</option>
+      <option value="https://res.cloudinary.com/flor-i-ronhack/image/upload/v1574875140/clinch/lunch.jpg">Lunch</option>
+      <option value="https://res.cloudinary.com/flor-i-ronhack/image/upload/v1574875140/clinch/vacations.jpg">Vacations
       </option>
     </select>
     <br><br>
@@ -31,8 +31,9 @@
     </label>
     <br><br>
 
+<label for="users">Who's going?</label>
     <select name="users" id="users" multiple>
-      <option>Who are you going with?</option>
+      <option selected disabled>Including yourself!</option>
       {{#each users}}
       <option value="{{_id}}">{{username}}</option>
       {{/each}}

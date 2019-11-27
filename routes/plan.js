@@ -65,7 +65,8 @@ router.post("/new-plan", (req, res, next) => {
         description,
         address,
         location,
-        owner
+        owner,
+        group
     });
 
     console.log(newPlan)

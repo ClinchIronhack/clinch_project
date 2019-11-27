@@ -6,6 +6,7 @@ const Group = require("../models/Group")
 const Plan = require("../models/Plan")
 const bodyParser = require("body-parser")
 const ensureLogin = require("connect-ensure-login");
+
 // const planRouter = require('./plan')
 
 // router.use('/:id/plan', planRouter);
@@ -13,44 +14,40 @@ const ensureLogin = require("connect-ensure-login");
 router.get("/new", ensureLogin.ensureLoggedIn(), (req, res, next) => {
   let owner = req.user
   User.find()
-  .then((users)=>{
-    // res.json({users, owner})
-    res.render('createEvent', {users, owner
-  })
-});
+    .then((users) => {
+      // res.json({users, owner})
+      res.render('createEvent', {
+        users,
+        owner
+      })
+    });
 });
 
 router.post("/new", ensureLogin.ensureLoggedIn(), (req, res, next) => {
-  // let body = req.body
-  // res.json({body})
-  
+  let body = req.body
+  // res.json(body)
   Group.create(req.body)
-    .then((group) => {
-      console.log(group._id);
-      console.log(req.user._id);
-      return User.findByIdAndUpdate({
-        _id: req.user._id
-      }, {
-        $push: {
-          groups: group._id
-        }
+    .then((group) => { 
+      body.users.forEach(user => {
+        return User.findByIdAndUpdate({
+          _id: user
+        }, {
+          $push: {
+            groups: group._id
+          }
+        }).then(groupAdd => console.log(groupAdd))
+        
       })
-      console.log('a')
     })
-    // push group in users array:
-    
-    // .then(()=>{
-    //   User.find(req.body.users)
-    // })
     .then(() => res.redirect('/auth/profile'))
 
 });
 
 
 router.get("/:id", ensureLogin.ensureLoggedIn("auth/login"), (req, res, next) => {
+ 
   Group.findById(req.params.id).populate('plans')
     .then(group => {
-      // res.json({group})
       res.render('event', {
         group
       })
@@ -74,12 +71,12 @@ router.post("/:id", ensureLogin.ensureLoggedIn("auth/login"), (req, res, next) =
       if (group !== null && group.plans.length > 0) {
         let planId = group.plans[0]._id;
         return Plan.findByIdAndUpdate({
-          _id: planId
-        }, {
-          $pull: {
-            votes: user._id
-          }
-        })
+            _id: planId
+          }, {
+            $pull: {
+              votes: user._id
+            }
+          })
           .then(() => Plan.updateOne({
             _id: bodyOL._id
           }, {
