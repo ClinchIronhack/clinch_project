@@ -3,7 +3,7 @@
 
 <aside>
 {{#each group.plans}}
-<h3><a href="/plan/{{_id}}">{{name}}</a></h3>
+<h3><a href="/group/{{group._id}}/plan/{{_id}}">{{name}}</a></h3>
 <br><br>
 
 <form action="/group/{{group._id}}" method="POST" >

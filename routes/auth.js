@@ -20,7 +20,7 @@ router.get("/login", (req, res, next) => {
 });
 
 router.post("/login", passport.authenticate("local", {
-  successRedirect: "/auth/login",
+  successRedirect: "/auth/profile",
   failureRedirect: "/auth/login",
   failureFlash: true,
   passReqToCallback: true
@@ -63,7 +63,7 @@ router.post("/signup", (req, res, next) => {
 
     newUser.save()
       .then(() => {
-        res.redirect("/auth/profile");
+        res.redirect("/auth/login");
       })
       .catch(err => {
         res.render("auth/signup", {
@@ -75,7 +75,7 @@ router.post("/signup", (req, res, next) => {
 
 router.get("/logout", (req, res) => {
   req.logout();
-  res.redirect("/");
+  res.redirect("/auth/login");
 });
 
 router.get("/profile", ensureLogin.ensureLoggedIn(),(req, res, next) => {

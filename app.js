@@ -76,7 +76,7 @@ app.use(session({
   secret: 'no more whtasapp infinite chains again',
   resave: true,
   saveUninitialized: true,
-  cookie: { maxAge: 60000 },
+  cookie: { maxAge: 600000 },
   store: new MongoStore({
     mongooseConnection: mongoose.connection,
     ttl: 24 * 60 * 60 // 1 day
@@ -96,7 +96,7 @@ const groupsRoutes = require('./routes/group');
 app.use('/group', groupsRoutes);
 
 const planRoutes = require('./routes/plan');
-app.use('/plan', planRoutes);
+app.use('/group/:groupId/plan', planRoutes);
 
 
 module.exports = app;

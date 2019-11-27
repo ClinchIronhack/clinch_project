@@ -6,9 +6,9 @@ const Group = require("../models/Group")
 const Plan = require("../models/Plan")
 const bodyParser = require("body-parser")
 const ensureLogin = require("connect-ensure-login");
-const planRouter = require('./plan')
+// const planRouter = require('./plan')
 
-router.use('/:id/plan', planRouter);
+// router.use('/:id/plan', planRouter);
 
 router.get("/new", ensureLogin.ensureLoggedIn(), (req, res, next) => {
   let owner = req.user
@@ -28,7 +28,7 @@ router.post("/new", ensureLogin.ensureLoggedIn(), (req, res, next) => {
     .then((group) => {
       console.log(group._id);
       console.log(req.user._id);
-      User.findByIdAndUpdate({
+      return User.findByIdAndUpdate({
         _id: req.user._id
       }, {
         $push: {
@@ -50,13 +50,14 @@ router.post("/new", ensureLogin.ensureLoggedIn(), (req, res, next) => {
 router.get("/:id", ensureLogin.ensureLoggedIn("auth/login"), (req, res, next) => {
   Group.findById(req.params.id).populate('plans')
     .then(group => {
+      // res.json({group})
       res.render('event', {
         group
       })
     });
 });
 
-router.post("/:_id", ensureLogin.ensureLoggedIn("auth/login"), (req, res, next) => {
+router.post("/:id", ensureLogin.ensureLoggedIn("auth/login"), (req, res, next) => {
   let user = req.user
   let paramsOL = req.params
   let bodyOL = req.body
@@ -97,7 +98,7 @@ router.post("/:_id", ensureLogin.ensureLoggedIn("auth/login"), (req, res, next) 
       }
     })
     .then(() =>
-      res.redirect(`/group/${req.params._id}`)
+      res.redirect(`/group/${req.params.id}`)
     )
 
 });
