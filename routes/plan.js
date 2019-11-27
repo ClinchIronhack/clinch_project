@@ -1,6 +1,8 @@
 const express = require("express");
 const passport = require('passport');
-const router = express.Router({ mergeParams: true });
+const router = express.Router({
+    mergeParams: true
+});
 const Plan = require("../models/Plan")
 const bodyParser = require("body-parser")
 
@@ -10,7 +12,9 @@ const bcryptSalt = 3;
 
 router.get("/new-plan", (req, res, next) => {
     let groupId = req.params.groupId
-    res.render("new-plan", { groupId })
+    res.render("new-plan", {
+        groupId
+    })
 })
 
 router.post("/new-plan", (req, res, next) => {
@@ -57,7 +61,11 @@ router.post("/new-plan", (req, res, next) => {
     // }
 
     const newPlan = new Plan({
-        name, description, address, location, owner
+        name,
+        description,
+        address,
+        location,
+        owner
     });
 
     console.log(newPlan)
@@ -98,10 +106,24 @@ router.get("/:planId/edit", (req, res, next) => {
 })
 
 router.post("/:planId/edit", (req, res, next) => {
-    const { name, description, address } = req.body
+    const {
+        name,
+        description,
+        address
+    } = req.body
     const owner = req.user.id
-    Plan.findByIdAndUpdate(req.params.planId, { name, description, address, owner })
-        .then(() => res.redirect(`/group/${req.params.groupId}`))
+    Plan.findByIdAndUpdate(req.params.planId, {
+            name,
+            description,
+            address,
+            owner
+        })
+        .then(() =>
+            // res.json({
+            //     idgrupo
+            // })
+            res.redirect(`/group/${req.params.groupId}`)
+        )
         .catch(err => console.log(err))
 })
 
