@@ -1,14 +1,22 @@
 <h1>{{group.name}}</h1>
+<br><br>
+
 <aside>
-    {{#each group.plans}}
-    <h3><a href="/plan/{{_id}}/group/">{{name}}</a></h3>
-    <form action="/group/{{group._id}}" method="POST">
-        <input type="hidden" name="_id" value={{_id}}>
-        <button>vote</button>
-    </form>
-    {{/each}}
+{{#each group.plans}}
+<h3><a href="/plan/{{_id}}">{{name}}</a></h3>
+<br><br>
+
+<form action="/group/{{group._id}}" method="POST" >
+<input type="hidden" name="_id" value={{_id}}>
+<br><br>
+
+<button>vote</button>
+</form>
+{{/each}}
 </aside>
-<div id="map">map</div>
-{{!-- aqui va la vista de los planes--}}
-{{!-- <a href="plan/new-plan"><button>Propose a Plan</button></a> --}}
-{{!-- <a href=“{{group._id}}/plan/new-plan”> <button>Propose a Plan</button></a> --}}
+<br><br>
+
+<div id="map" style="width: 30vw;"></div>
+<br><br>
+
+<a href="/group/{{group._id}}/plan/new-plan"><button>Propose a Plan</button></a> 

@@ -10,13 +10,40 @@ const planRouter = require('./plan')
 
 router.use('/:id/plan', planRouter);
 
-router.get("/new-group", ensureLogin.ensureLoggedIn("auth/login"), (req, res, next) => {
-  res.render('newGroup');
+router.get("/new", ensureLogin.ensureLoggedIn(), (req, res, next) => {
+  let owner = req.user
+  User.find()
+  .then((users)=>{
+    // res.json({users, owner})
+    res.render('createEvent', {users, owner
+  })
+});
 });
 
-router.post("/new-group", ensureLogin.ensureLoggedIn("auth/login"), (req, res, next) => {
-  /*Group.create(req.body)
-res.redirect ('/auth/profile') */
+router.post("/new", ensureLogin.ensureLoggedIn(), (req, res, next) => {
+  // let body = req.body
+  // res.json({body})
+  
+  Group.create(req.body)
+    .then((group) => {
+      console.log(group._id);
+      console.log(req.user._id);
+      User.findByIdAndUpdate({
+        _id: req.user._id
+      }, {
+        $push: {
+          groups: group._id
+        }
+      })
+      console.log('a')
+    })
+    // push group in users array:
+    
+    // .then(()=>{
+    //   User.find(req.body.users)
+    // })
+    .then(() => res.redirect('/auth/profile'))
+
 });
 
 
@@ -35,13 +62,13 @@ router.post("/:_id", ensureLogin.ensureLoggedIn("auth/login"), (req, res, next) 
   let bodyOL = req.body
 
   Group.findById(paramsOL._id).populate({
-    path: 'plans',
-    match: {
-      votes: {
-        $eq: user._id
+      path: 'plans',
+      match: {
+        votes: {
+          $eq: user._id
+        }
       }
-    }
-  })
+    })
     .then(group => {
       if (group !== null && group.plans.length > 0) {
         let planId = group.plans[0]._id;
