@@ -4,6 +4,8 @@ const router = express.Router({
     mergeParams: true
 });
 const Plan = require("../models/Plan")
+const User = require("../models/User")
+const Group = require("../models/Group")
 const bodyParser = require("body-parser")
 
 // Bcrypt to encrypt passwords
@@ -26,11 +28,13 @@ router.post("/new-plan", (req, res, next) => {
     const latitude = req.body.latitude
     const longitude = req.body.longitude
     const group = req.params.groupId
+    console.log(owner)
 
     const location = {
         type: "Point",
-        coordinates: [40.23, -3.24]
-        //     [req.body.latitude, req.body.longitude]
+        coordinates:
+            //[req.body.latitude, req.body.longitude]
+            [40.23, -3.24]
     }
 
     console.log('Name:' + name)
@@ -68,12 +72,15 @@ router.post("/new-plan", (req, res, next) => {
         owner
     });
 
-    console.log(newPlan)
     newPlan.save()
         .then(createdPlan => {
-            console.log(createdPlan)
-            res.redirect(`/group/${req.params.groupId}`)
-        }).catch((err) => console.log(err))
+            Group.findById(group).then((group) => {
+                let groupPlans = group.plans
+                groupPlans.push(createdPlan._id)
+                return Group.update({ _id: group._id }, { plans: groupPlans })
+            }).then(() => res.redirect(`/group/${req.params.groupId}`))
+        })
+        .catch((err) => console.log(err))
 })
 
 
@@ -113,11 +120,11 @@ router.post("/:planId/edit", (req, res, next) => {
     } = req.body
     const owner = req.user.id
     Plan.findByIdAndUpdate(req.params.planId, {
-            name,
-            description,
-            address,
-            owner
-        })
+        name,
+        description,
+        address,
+        owner
+    })
         .then(() =>
             // res.json({
             //     idgrupo
@@ -127,15 +134,6 @@ router.post("/:planId/edit", (req, res, next) => {
         .catch(err => console.log(err))
 })
 
-
-// router.post("/:planId/delete", (req, res, next) => {
-//     let planId = req.params.planId
-//     const owner = req.user.id
-//     const { name, description, address } = req.body
-//     Plan.findByIdAndDelete(req.params.planId, { name, description, address, owner })
-//         .then(() => res.redirect(`/group/${req.params.id}`))
-//         .catch(err => console.log(err))
-// })
 
 router.get("/:planId/delete", (req, res, next) => {
     let planId = req.params.planId

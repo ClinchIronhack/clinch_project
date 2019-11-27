@@ -4,7 +4,6 @@ const Schema = mongoose.Schema;
 const planSchema = new Schema({
     name: String,
     description: String,
-    photo: String,
     address: String,
     owner: { type: Schema.Types.ObjectId, ref: 'User' },
     location: { type: { type: String }, coordinates: [Number] },

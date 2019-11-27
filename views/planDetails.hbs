@@ -1,4 +1,4 @@
-<a href="/plans/list">Back</a>
+<a href="/group">Back</a>
 <br><br>
 <br><br>
 <br><br>
@@ -9,7 +9,15 @@ DETAILS PLAN
 
 {{!-- Owner :{{user.id}}
 <br><br> --}}
+<br><br>
+
+Owner : {{user.username}}
+<br><br>
+<br><br>
+
 CAMBIARLO POR USERNAME
+
+<br><br>
 
 Name : {{plan.name}}
 
@@ -27,20 +35,24 @@ Where : {{plan.location}}
 Votes : {{plan.votes}}
 
 <br><br>
-
-<a class="plan-bottom-2 col-sm-6" href="/plans/<%=plan.id%>/in"> I´m in! </a>
-
 <br><br>
-
-{{!-- <img class="plan-image" src="<%= plan.picPath %>"> --}}
 
 <br><br>
 <form action=""></form>
 <input type="button" id="getPos" value="Show position">
+
+<br><br>
 <br><br>
 
 <a href="{{plan._id}}/delete"> <button type="submit">Delete Plan</button></a>
 
+<br><br>
+<br><br>
+
+<a href="{{plan._id}}/edit"> <button type="submit">Update Plan</button></a>
+
+<br><br>
+<br><br>
 
 
 <div id="map"></div>
