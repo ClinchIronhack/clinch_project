@@ -9,7 +9,7 @@ const bcrypt = require("bcrypt");
 const bcryptSalt = 3;
 
 router.get("/new-plan", (req, res, next) => {
-    let groupId = req.params.id
+    let groupId = req.params.groupId
     res.render("new-plan", { groupId })
 })
 
@@ -21,7 +21,7 @@ router.post("/new-plan", (req, res, next) => {
     const owner = req.user ? req.user._id : null
     const latitude = req.body.latitude
     const longitude = req.body.longitude
-    const group = req.params.id
+    const group = req.params.groupId
 
     const location = {
         type: "Point",
@@ -83,7 +83,7 @@ router.get("/:planId", (req, res, next) => {
 
 
 router.get("/:planId/edit", (req, res, next) => {
-    let groupId = req.params.id
+    let groupId = req.params.groupId
     let planId = req.params.planId
     console.log(groupId)
     console.log(planId)
@@ -101,7 +101,7 @@ router.post("/:planId/edit", (req, res, next) => {
     const { name, description, address } = req.body
     const owner = req.user.id
     Plan.findByIdAndUpdate(req.params.planId, { name, description, address, owner })
-        .then(() => res.redirect(`/group/${req.params.id}`))
+        .then(() => res.redirect(`/group/${req.params.groupId}`))
         .catch(err => console.log(err))
 })
 
@@ -117,7 +117,7 @@ router.post("/:planId/edit", (req, res, next) => {
 
 router.get("/:planId/delete", (req, res, next) => {
     let planId = req.params.planId
-    let groupId = req.params.id
+    let groupId = req.params.groupId
     console.log(groupId)
     Plan.findByIdAndDelete(planId)
         .then(() => res.redirect(`/group/${groupId}`))
