@@ -64,7 +64,7 @@ router.post("/new-plan", (req, res, next) => {
     newPlan.save()
         .then(createdPlan => {
             console.log(createdPlan)
-            res.redirect(`/group/${req.params.id}`)
+            res.redirect(`/group/${req.params.groupId}`)
         }).catch((err) => console.log(err))
 })
 
