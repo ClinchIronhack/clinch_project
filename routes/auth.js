@@ -13,6 +13,7 @@ const bcryptSalt = 3;
 
 router.get("/login", (req, res, next) => {
   res.render("auth/login", {
+    //tiene que redirigir  a perfil
     "message": req.flash("error")
   });
 });
@@ -24,12 +25,6 @@ router.post("/login", passport.authenticate("local", {
   passReqToCallback: true
 }));
 
-// router.post("/", passport.authenticate("local", {
-//   successRedirect: "/auth/profile",
-//   failureRedirect: "/",
-//   failureFlash: true,
-//   passReqToCallback: true
-// }));
 
 router.get("/signup", (req, res, next) => {
   res.render("auth/signup");
@@ -81,21 +76,5 @@ router.get("/logout", (req, res) => {
   req.logout();
   res.redirect("/");
 });
-
-// router.get("/profile", (req, res, next) => {
-//   User.findById(req.body._id)
-//     .then(user =>
-//       res.render("auth/profile", {
-//         user
-//       })
-//     );
-// });
-
-// router.post("/profile", (req, res) => {
-//   capturate new profile pic
-// });
-
-
-
 
 module.exports = router;

@@ -83,13 +83,12 @@ router.get("/:planId", (req, res, next) => {
 
 
 router.get("/:planId/edit", (req, res, next) => {
-    let groupId = req.params.groupId
+    let groupId = req.params.id
     let planId = req.params.planId
     console.log(groupId)
     console.log(planId)
     Plan.findById(planId)
         .then(plan => {
-            // console.log(plan)
             res.render("edit-plan", {
                 groupId,
                 plan
@@ -102,7 +101,7 @@ router.post("/:planId/edit", (req, res, next) => {
     const { name, description, address } = req.body
     const owner = req.user.id
     Plan.findByIdAndUpdate(req.params.planId, { name, description, address, owner })
-        .then(() => res.redirect(`/group/${req.params.groupId}`))
+        .then(() => res.redirect(`/group/${req.params.id}`))
         .catch(err => console.log(err))
 })
 
