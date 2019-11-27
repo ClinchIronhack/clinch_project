@@ -9,14 +9,23 @@ const ensureLogin = require("connect-ensure-login");
 const planRouter = require('./plan')
 
 router.get("/new", ensureLogin.ensureLoggedIn(), (req, res, next) => {
-  res.render('createEvent');
+  let owner = req.user
+  User.find()
+  .then((users)=>{
+    // res.json({users, owner})
+    res.render('createEvent', {users, owner
+  })
+});
 });
 
 router.post("/new", ensureLogin.ensureLoggedIn(), (req, res, next) => {
+  // let body = req.body
+  // res.json({body})
+  
   Group.create(req.body)
     .then((group) => {
-      console.log(group._id)
-      console.log(req.user._id)
+      console.log(group._id);
+      console.log(req.user._id);
       User.findByIdAndUpdate({
         _id: req.user._id
       }, {
@@ -26,6 +35,11 @@ router.post("/new", ensureLogin.ensureLoggedIn(), (req, res, next) => {
       })
       console.log('a')
     })
+    // push group in users array:
+    
+    // .then(()=>{
+    //   User.find(req.body.users)
+    // })
     .then(() => res.redirect('/auth/profile'))
 
 });

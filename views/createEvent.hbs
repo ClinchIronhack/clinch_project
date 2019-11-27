@@ -1,33 +1,45 @@
 <div>
   <form action="/group/new" method="POST">
-  <label for="name">What's the occation?
-    <input id="name" type="text" name="name" placeholder="What's the occasion?">
-</label>
-<select name="pic" id="pic">
-<option>Pick a theme</option>
-    <option value="birthday-party.jpg" data-style="background-image: url('../../public/images/birthday-party.jpg');">Birthday</option>
-    <option value="brunch.jpg" data-style="background-image: url('../../public/images/brunch.jpg');">Brunch</option>
-    <option value="drinks.jpg" data-style="background-image: url('../../public/images/drinks.jpg');">Drinks</option>
-    <option value="lunch.jpg" data-style="background-image: url('../../public/images/lunch.jpg');">Lunch</option>
-    <option value="vacations.jpg" data-style="background-image: url('../../public/images/vacations.jpg');">Vacations</option>
-  </select>
+    <label for="name">What's the occation?
+      <input id="name" type="text" name="name" placeholder="What's the occasion?">
+    </label>
+    <br><br>
 
-    <label for="dateEvent"> When's happening</p> 
-    <input type="text" name="dateEvent" placeholder="DD-MM-YYYY" required 
-pattern="(?:(?:0[13578]|1[02])-31))|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])" 
-title="DD-MM-YYYY"/>
-</label>
-<label for="">Votes up to
-    <input type="text" name="dateLimit" placeholder="DD-MM-YYYY" required 
-pattern="(?:(?:0[13578]|1[02])-31))|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])" 
-title="DD-MM-YYYY"/>
-</label>
+    <select name="pic" id="pic">
+      <option>Pick a theme</option>
+      <option value="birthday-party.jpg" data-style="background-image: url('../../public/images/birthday-party.jpg');">
+        Birthday</option>
+      <option value="brunch.jpg" data-style="background-image: url('../../public/images/brunch.jpg');">Brunch</option>
+      <option value="drinks.jpg" data-style="background-image: url('../../public/images/drinks.jpg');">Drinks</option>
+      <option value="lunch.jpg" data-style="background-image: url('../../public/images/lunch.jpg');">Lunch</option>
+      <option value="vacations.jpg" data-style="background-image: url('../../public/images/vacations.jpg');">Vacations
+      </option>
+    </select>
+    <br><br>
 
+    <label for="dateEvent"> When's happening</p>
+      <input type="text" name="dateEvent" placeholder="DD-MM-YYYY" required
+        pattern="(?:(?:0[13578]|1[02])-31))|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])"
+        title="DD-MM-YYYY" />
+    </label>
+    <br><br>
 
+    <label for="">Votes up to
+      <input type="text" name="dateLimit" placeholder="DD-MM-YYYY" required
+        pattern="(?:(?:0[13578]|1[02])-31))|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])"
+        title="DD-MM-YYYY" />
+    </label>
+    <br><br>
 
-
-
+    <select name="users" id="users" multiple>
+      <option>Who are you going with?</option>
+      {{#each users}}
+      <option value="{{_id}}">{{username}}</option>
+      {{/each}}
+    </select>
+    <br><br>
 
     <button>Create</button>
+    <input id="owner" type="text" name="owner" value="{{owner._id}}" hidden>
   </form>
 </div>
