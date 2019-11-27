@@ -5,4 +5,9 @@ body {
 a {
   color: #00B7FF; }
 
+#groupMap {
+  float: right;
+  width: 40vw;
+  height: 80vh; }
+
 /*# sourceMappingURL=style.css.map */

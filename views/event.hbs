@@ -5,6 +5,7 @@
 {{#each group.plans}}
 <h3><a href="/group/{{group._id}}/plan/{{_id}}">{{name}}</a></h3>
 <br><br>
+<p>Votes so far: {{votes.length}}</p>
 
 <form action="/group/{{group._id}}" method="POST" >
 <input type="hidden" name="_id" value={{_id}}>
@@ -16,7 +17,11 @@
 </aside>
 <br><br>
 
-<div id="map" style="width: 30vw;"></div>
+<div id="groupMap"></div>
 <br><br>
 
 <a href="/group/{{group._id}}/plan/new-plan"><button>Propose a Plan</button></a> 
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCyXhe0Py7ZQkmgfZrEFF_jbnnaJMT9e_s"></script>
+ <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
+<script type="text/javascript" src="/javascripts/eventMap.js"></script>

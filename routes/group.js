@@ -6,7 +6,6 @@ const Group = require("../models/Group")
 const Plan = require("../models/Plan")
 const bodyParser = require("body-parser")
 const ensureLogin = require("connect-ensure-login");
-
 // const planRouter = require('./plan')
 
 // router.use('/:id/plan', planRouter);
@@ -27,7 +26,7 @@ router.post("/new", ensureLogin.ensureLoggedIn(), (req, res, next) => {
   let body = req.body
   // res.json(body)
   Group.create(req.body)
-    .then((group) => { 
+    .then((group) => {
       body.users.forEach(user => {
         return User.findByIdAndUpdate({
           _id: user
@@ -36,7 +35,7 @@ router.post("/new", ensureLogin.ensureLoggedIn(), (req, res, next) => {
             groups: group._id
           }
         }).then(groupAdd => console.log(groupAdd))
-        
+
       })
     })
     .then(() => res.redirect('/auth/profile'))
@@ -44,20 +43,31 @@ router.post("/new", ensureLogin.ensureLoggedIn(), (req, res, next) => {
 });
 
 
-router.get("/:id", ensureLogin.ensureLoggedIn("auth/login"), (req, res, next) => {
- 
+router.get("/:id", (req, res, next) => {
   Group.findById(req.params.id).populate('plans')
-    .then(group => {
+    .then((group) => {
+      // res.json(group)
+      group.plans.sort((a, b) => {
+        return (b.votes.length) - (a.votes.length);
+      })
+      // res.json({
+      //   group
+      // })
       res.render('event', {
         group
       })
+    })
+    .catch(error => {
+      console.log(error);
     });
-});
+})
 
-router.post("/:id", ensureLogin.ensureLoggedIn("auth/login"), (req, res, next) => {
+//esto esta roto
+router.post("/:id", (req, res, next) => {
   let user = req.user
   let paramsOL = req.params
   let bodyOL = req.body
+  // console.log(user, paramsOL.id, bodyOL);
 
   Group.findById(paramsOL._id).populate({
       path: 'plans',
@@ -95,9 +105,11 @@ router.post("/:id", ensureLogin.ensureLoggedIn("auth/login"), (req, res, next) =
       }
     })
     .then(() =>
-      res.redirect(`/group/${req.params.id}`)
+      res.redirect(`/group/${req.params._id}`)
     )
-
+    .catch(error => {
+      console.log(error);
+    })
 });
 
 
