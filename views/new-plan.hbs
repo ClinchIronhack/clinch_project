@@ -1,30 +1,35 @@
-<a href="/group/{{groupId}}">Back</a>
-
-<br><br>
-<br><br>
-
-ADD PLAN!
-
-<br><br>
-
+<header>
+    <nav>
+        <h4>CLINCH</h4>
+        <ul>
+            <li><a href="/group/{{groupId}}">Back</a></li>
+            <li><a href="/auth/logout">
+                    Log Out</a></li>
+        </ul>
+    </nav>
+</header>
+<section class="main card">
+<h3>ADD A PLAN!</h3>
+<div class="form2">
 <form method="POST" action="/group/{{groupId}}/plan/new-plan" id="form-container">
-
+    <label for="username">Name
     <input type="text" name="name" placeholder="Name" required>
-    <br><br>
+    </label>
+    <label for="username">Description
     <input type="text" name="description" placeholder="Description" required>
-    <br><br>
+    </label>
+    <label for="username">Address
     <input id="address" type="text" name="address" placeholder="Address" required>
-    <br><br>
-    <input type="button" id="getPos" value="Show position">
+    </label>
+    <input type="button" class="button small short orange"id="getPos" value="Show position">
     <input type="hidden" id="lat" name="latitude" placeholder="Latitude">
-    <br><br>
     <input type="hidden" id="lon" name="longitude" placeholder="Longitude">
-    <br><br>
-    <button type="submit">Add Plan</button>
+    
+    <button class="button blue-back small"type="submit">Add Plan</button>
 </form>
-<br><br>
-<div id="map" style="height: 45vh;"></div>
-
+</div>
+<div id="map" style="height: 60vh; width: 60vw;"></div>
+</section>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCyXhe0Py7ZQkmgfZrEFF_jbnnaJMT9e_s"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"
     integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>

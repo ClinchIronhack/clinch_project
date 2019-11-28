@@ -1,27 +1,41 @@
-<a href="/group/{{plan.group}}/plan/{{plan._id}}">Back</a>
+<header>
+    <nav>
+        <h4>CLINCH</h4>
+        <ul>
+            <li><a href="/group/{{plan.group}}/plan/{{plan._id}}">Back</a></li>
+            <li><a href="/auth/logout">
+                    Log Out</a></li>
+        </ul>
+    </nav>
+</header>
 
-<br><br>
-<br><br UPDATE <br><br>
-<br><br>
+
+
+<section class="main card">
+ <h3>UPDATE </h3>
+<div class="form2">
 <form action="/group/{{groupId}}/plan/{{plan._id}}/edit" method="POST" id="form-container">
+<label for="username">Name
     <input id="name" type="text" name="name" placeholder="Plan name" value="{{plan.name}}">
-    <br><br>
+    </label>
+    <label for="username">Description
     <input id="description" type="text" name="description" value="{{plan.description}}">
-    <br><br>
+     </label>
+     <label for="username">Address
     <input id="address" type="text" name="address" placeholder="Address" value="{{plan.address}}">
-    <br><br>
-    <input type="button" id="getPos" value="Show position">
-    <br><br>
-    <button type='submit'> Update</button>
-    <br><br>
+      </label>
+    <input type="button"class="button small short orange" id="getPos" value="Show position">
+    
+    <button class="button blue-back small" type='submit'> Update</button>
+    
 
     <input id="lat" name="latitude" type="hidden" value={{plan.location0}}>
     <input id="lng" name="longitude" type="hidden" value={{plan.location1}}>
 
 </form>
-
-<div id="map" style="height: 50vh;"></div>
-
+</div>
+<div id="map" style="height: 60vh; width: 60vw;"></div>
+</section>
 
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCyXhe0Py7ZQkmgfZrEFF_jbnnaJMT9e_s"></script>

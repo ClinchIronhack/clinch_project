@@ -185,7 +185,8 @@ a {
   padding: .8rem 1rem;
   width: 100%;
   font-size: 1rem;
-  font-family: 'Montserrat', sans-serif; }
+  font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase; }
 
 .blue-back {
   background-color: #002371; }
@@ -204,7 +205,7 @@ a {
 #groupMap {
   float: right;
   width: 40vw;
-  height: 80vh; }
+  height: 60vh; }
 
 nav {
   display: flex;
@@ -290,20 +291,81 @@ h5 {
 .votes {
   display: flex;
   align-items: space-evenly;
-  flex-direction: column; }
+  flex-direction: column;
+  max-width: 40vw; }
 
 .list {
   padding: 1.5rem; }
   .list h6 {
-    font-size: 1.1rem;
-    line-height: 2.4rem;
+    font-size: 1.3rem;
+    line-height: 2rem;
     text-transform: uppercase; }
     .list h6 a {
-      color: #444;
+      color: #fe5133;
       letter-spacing: 0.1em;
       text-decoration: none;
       font-weight: 500; }
   .list p {
+    font-size: 1.1rem; }
+
+.button-votes {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 15vw; }
+
+.small {
+  font-size: 0.7rem; }
+
+.orange-back {
+  background-color: #ff794f; }
+
+.form2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 20vw;
+  padding: 2rem; }
+  .form2 input {
+    color: #222525;
+    margin: .4rem 0 0.8rem 0;
+    background-color: white;
+    display: block;
+    padding: .8rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    border: none; }
+  .form2 label {
+    color: #222525;
     font-size: 1rem; }
+  .form2 a {
+    color: #f8f5f2;
+    text-decoration: none;
+    font-size: .8rem; }
+  .form2 .orange {
+    font-size: 0.7rem;
+    background-color: #ff794f;
+    color: #f8f5f2; }
+
+.delete {
+  background-color: #fe5133; }
+
+.details p {
+  font-size: 1rem;
+  color: #222525;
+  line-height: 2rem;
+  margin-top: 0.5rem;
+  width: 20vw; }
+
+.bold {
+  color: #ff794f;
+  font-weight: 700;
+  margin-right: 1rem; }
+
+.split {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; }
 
 /*# sourceMappingURL=style.css.map */

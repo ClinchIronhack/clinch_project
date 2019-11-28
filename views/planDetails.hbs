@@ -1,44 +1,32 @@
-<a href="/group/{{plan.group}}">Back</a>
+<header>
+    <nav>
+        <h4>CLINCH</h4>
+        <ul>
+            <li><a href="/group/{{plan.group}}">Back</a></li>
+            <li><a href="/auth/logout">
+                    Log Out</a></li>
+        </ul>
+    </nav>
+</header>
+<section class="main card">
+<div class="details">
+<h3>{{plan.name}}</h3>
 <br><br>
-<br><br>
-<br><br>
-
-DETAILS PLAN
-
-<br><br>
-<br><br>
-
-* Name : {{plan.name}}
-
-<br><br>
-
-* Reasons/ comments : {{plan.description}}
-
-<br><br>
-
-* Where : {{plan.address}}
-
-<br><br>
-
-* Votes : {{plan.numVotes}}
-
-<br><br>
+<p><span class="bold">Why</span>{{plan.description}}</p> 
+<p><span class="bold">Where</span> {{plan.address}}</p>
+<p><span class="bold">Votes</span> {{plan.numVotes}}</p>
 
 <input id="lat" type="hidden" value={{plan.location0}}>
 <input id="lng" type="hidden" value={{plan.location1}}>
 
-<br><br>
+<div class="split">
+    <a href="{{plan._id}}/edit"> <button class="button small short orange-back"type="submit">Update Plan</button></a>
+<a href="{{plan._id}}/delete"> <button class="button small short delete" type="submit">Delete Plan</button></a>
 
-<a href="{{plan._id}}/delete"> <button type="submit">Delete Plan</button></a>
-
-<br><br>
-
-<a href="{{plan._id}}/edit"> <button type="submit">Update Plan</button></a>
-
-<br><br>
-
-<div id="map" style="height: 30vh;"></div>
-
+</div>
+</div>
+<div id="map" style="height: 60vh; width: 40vw;"></div>
+</section>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCyXhe0Py7ZQkmgfZrEFF_jbnnaJMT9e_s"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"
     integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
