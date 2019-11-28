@@ -83,7 +83,7 @@ video {
   margin: 0;
   padding: 0;
   border: 0;
-  font-size: 100%;
+  font-size: 10px;
   font: inherit;
   vertical-align: baseline; }
 
@@ -127,9 +127,9 @@ table {
   border-spacing: 0; }
 
 body {
-  font: 10px 'Montserrat', sans-serif;
   width: 100vw;
-  height: 100vh; }
+  height: 100vh;
+  font-family: 'Montserrat', sans-serif; }
 
 h1,
 h2 {
@@ -201,6 +201,9 @@ a {
   background-color: #ff794f;
   width: 100vw;
   height: 100vh; }
+  .login-signup img {
+    height: 5.6rem;
+    margin: 2.4rem; }
 
 #groupMap {
   float: right;
@@ -222,7 +225,10 @@ nav {
     nav ul a {
       color: #f8f5f2;
       text-decoration: none;
-      margin-left: 0.8rem; }
+      margin-left: 1.5rem; }
+  nav img {
+    display: block;
+    max-width: 5rem; }
   nav h4 {
     color: #f8f5f2;
     font-size: 2rem;
@@ -342,7 +348,7 @@ h5 {
   .form2 a {
     color: #f8f5f2;
     text-decoration: none;
-    font-size: .8rem; }
+    font-size: 1rem; }
   .form2 .orange {
     font-size: 0.7rem;
     background-color: #ff794f;
@@ -367,5 +373,45 @@ h5 {
   display: flex;
   flex-direction: row;
   justify-content: space-between; }
+
+#owner {
+  display: none; }
+
+.form3 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100vw;
+  padding: 2rem; }
+  .form3 input {
+    color: #222525;
+    margin: .6rem 0 1.8rem 0;
+    background-color: white;
+    display: block;
+    padding: .8rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    border: none; }
+  .form3 label {
+    color: #222525;
+    font-size: 1rem; }
+  .form3 a {
+    color: #f8f5f2;
+    text-decoration: none;
+    font-size: .8rem; }
+  .form3 .custom-select {
+    color: #222525;
+    font-family: 'Montserrat', sans-serif;
+    background-color: white;
+    width: 100%;
+    border: none;
+    border-radius: none;
+    font-size: .8rem;
+    line-height: 2rem;
+    padding: .5rem; }
+    .form3 .custom-select .pick {
+      height: 5rem;
+      padding: 2rem;
+      margin-bottom: 1.8rem; }
 
 /*# sourceMappingURL=style.css.map */

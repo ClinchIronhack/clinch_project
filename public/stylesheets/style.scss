@@ -96,7 +96,7 @@ video {
   margin: 0;
   padding: 0;
   border: 0;
-  font-size: 100%;
+  font-size: 10px;
   font: inherit;
   vertical-align: baseline;
 }
@@ -148,9 +148,9 @@ table {
 }
 
 body {
-  font: 10px 'Montserrat', sans-serif;
   width: 100vw;
   height: 100vh;
+  font-family: 'Montserrat', sans-serif;
 }
 
 h1,
@@ -242,6 +242,11 @@ a {
   width: 100vw;
   height: 100vh;
 
+  img{
+    height: 5.6rem;
+    margin: 2.4rem;
+  }
+
 }
 
 #groupMap {
@@ -268,10 +273,14 @@ nav {
     a {
       color: $color-white;
       text-decoration: none;
-      margin-left: 0.8rem;
+      margin-left: 1.5rem;
     }
   }
-
+img{
+  // height: 1rem;
+  display: block;
+  max-width: 5rem;
+}
   h4 {
     color: $color-white;
     font-size: 2rem;
@@ -426,18 +435,20 @@ h5 {
   label {
     color: $color-dark-gray;
     font-size: 1rem;
+
   }
 
   a {
     color: $color-white;
     text-decoration: none;
-    font-size: .8rem;
+    font-size: 1rem;
   }
   .orange{
     font-size: 0.7rem;
     background-color: $color-orange;
     color: $color-white;
   }
+  
 }
 
 .delete{
@@ -465,3 +476,65 @@ h5 {
   justify-content: space-between;
 
 }
+
+#owner{
+  display: none;
+}
+
+.form3 {
+  // background-color: #ccc ;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100vw;
+  padding: 2rem;
+
+  input {
+    color: $color-dark-gray;
+    margin: .6rem 0 1.8rem 0;
+    background-color:white;
+    display: block;
+    padding: .8rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    border: none;
+
+  }
+
+
+
+  label {
+    color: $color-dark-gray;
+    font-size: 1rem;
+
+  }
+
+  a {
+    color: $color-white;
+    text-decoration: none;
+    font-size: .8rem;
+  }
+  
+  .custom-select {
+    color: $color-dark-gray;
+    font-family: 'Montserrat', sans-serif;
+    background-color: white;
+    width: 100%;
+    border: none;
+    border-radius: none;
+    font-size: .8rem;
+    line-height: 2rem;
+    padding: .5rem;
+
+    .pick{
+      height: 5rem;
+      padding:2rem;
+      margin-bottom:1.8rem;
+    }
+  }
+}
+
+
+
+
+
