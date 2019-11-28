@@ -32,10 +32,10 @@ router.post("/new-plan", (req, res, next) => {
 
     const location = {
         type: "Point",
-        coordinates:
-            //[req.body.latitude, req.body.longitude]
-            [40.23, -3.24]
+        coordinates: [latitude, longitude]
     }
+
+    console.log(location)
 
     console.log('Name:' + name)
     console.log('description:' + description)
@@ -69,7 +69,8 @@ router.post("/new-plan", (req, res, next) => {
         description,
         address,
         location,
-        owner
+        owner,
+        group
     });
 
     newPlan.save()
@@ -88,7 +89,9 @@ router.get("/:planId", (req, res, next) => {
     let planId = req.params.planId
     Plan.findById(planId)
         .then(plan => {
-            console.log(plan)
+            plan.location0 = JSON.stringify(plan.location.coordinates[0])
+            plan.location1 = JSON.stringify(plan.location.coordinates[1])
+            plan.numVotes = plan.votes.length
             res.render("planDetails", {
                 plan
             })
@@ -98,12 +101,22 @@ router.get("/:planId", (req, res, next) => {
 
 
 router.get("/:planId/edit", (req, res, next) => {
+    //router.get("/:planId/edit", ensureLogin.ensureLoggedIn("auth/login"), (req, res, next) => {
+    console.log(req.user)
+    if (req.user) {
+        const owner = req.user._id
+    }
+    //
     let groupId = req.params.groupId
     let planId = req.params.planId
-    console.log(groupId)
-    console.log(planId)
+
     Plan.findById(planId)
         .then(plan => {
+            // if (owner !== plan.owner) {
+            //     res.redirect(`/:${req.params.planId}/edit`)
+            // }
+            plan.location0 = JSON.stringify(plan.location.coordinates[0])
+            plan.location1 = JSON.stringify(plan.location.coordinates[1])
             res.render("edit-plan", {
                 groupId,
                 plan
@@ -116,14 +129,20 @@ router.post("/:planId/edit", (req, res, next) => {
     const {
         name,
         description,
-        address
+        address,
+        latitude,
+        longitude
     } = req.body
-    const owner = req.user.id
+    //const owner = req.user.id
     Plan.findByIdAndUpdate(req.params.planId, {
         name,
         description,
         address,
-        owner
+        location: {
+            type: "Point",
+            coordinates: [latitude, longitude]
+        }
+        //owner
     })
         .then(() =>
             // res.json({

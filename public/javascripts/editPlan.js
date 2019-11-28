@@ -1,5 +1,23 @@
 $(document).ready(function () {
 
+    let lat = +$("#lat").val()
+    let lng = +$("#lng").val()
+
+    console.log(lat, lng)
+
+    let latLong = { lat, lng }
+
+    let map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 15,
+        center: latLong
+    })
+
+    let marker = new google.maps.Marker({
+        position: latLong,
+        map: map
+    })
+
+
     var geocoder = new google.maps.Geocoder();
 
 
@@ -50,7 +68,7 @@ $(document).ready(function () {
                     markers.push(marker1);
                 }
                 document.getElementById('lat').value = results[0].geometry.location.lat();
-                document.getElementById('lon').value = results[0].geometry.location.lng();
+                document.getElementById('lng').value = results[0].geometry.location.lng();
 
             } else {
                 alert('Geocoder was not successful for the following reason: ' + status);
@@ -61,14 +79,6 @@ $(document).ready(function () {
     var markers = [];
 
 
-    function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-            center: { lat: 40.4183083, lng: -3.70275 },
-            zoom: 15
-        });
-    }
 
 
-    initMap()
-
-});
+})
