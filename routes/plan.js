@@ -7,6 +7,7 @@ const Plan = require("../models/Plan")
 const User = require("../models/User")
 const Group = require("../models/Group")
 const bodyParser = require("body-parser")
+const ensureLogin = require("connect-ensure-login");
 
 // Bcrypt to encrypt passwords
 const bcrypt = require("bcrypt");
@@ -28,7 +29,6 @@ router.post("/new-plan", (req, res, next) => {
     const latitude = req.body.latitude
     const longitude = req.body.longitude
     const group = req.params.groupId
-    console.log(owner)
 
     const location = {
         type: "Point",
@@ -102,18 +102,18 @@ router.get("/:planId", (req, res, next) => {
 
 router.get("/:planId/edit", (req, res, next) => {
     //router.get("/:planId/edit", ensureLogin.ensureLoggedIn("auth/login"), (req, res, next) => {
-    console.log(req.user)
-    if (req.user) {
-        const owner = req.user._id
-    }
-    //
+    console.log
+    // if (req.user) {
+    //     console.log('Sesión Activa, hay user')
+    //     const owner = req.user.id
+    // }
     let groupId = req.params.groupId
     let planId = req.params.planId
 
     Plan.findById(planId)
         .then(plan => {
             // if (owner !== plan.owner) {
-            //     res.redirect(`/:${req.params.planId}/edit`)
+            //     res.redirect(`/:${req.params.id}/edit`)
             // }
             plan.location0 = JSON.stringify(plan.location.coordinates[0])
             plan.location1 = JSON.stringify(plan.location.coordinates[1])

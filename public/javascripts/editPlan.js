@@ -17,9 +17,7 @@ $(document).ready(function () {
         map: map
     })
 
-
     var geocoder = new google.maps.Geocoder();
-
 
     let button = document.querySelector('#getPos')
     button.addEventListener('click', function (event) { geocodeAddress(geocoder, map) })

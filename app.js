@@ -76,10 +76,10 @@ app.use(session({
   secret: 'no more whtasapp infinite chains again',
   resave: true,
   saveUninitialized: true,
-  cookie: { maxAge: 600000 },
+  //cookie: { maxAge: 600000 },
   store: new MongoStore({
     mongooseConnection: mongoose.connection,
-    ttl: 24 * 60 * 60 // 1 day
+    //ttl: 24 * 60 * 60 // 1 day
   })
 }));
 app.use(flash());

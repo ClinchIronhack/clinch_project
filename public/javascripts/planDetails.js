@@ -1,7 +1,5 @@
 $(document).ready(function () {
 
-    console.log()
-
     let lat = +$("#lat").val()
     let lng = +$("#lng").val()
 
@@ -18,4 +16,5 @@ $(document).ready(function () {
         position: latLong,
         map: map
     })
+
 })
