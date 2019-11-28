@@ -42,7 +42,6 @@ router.post("/new", ensureLogin.ensureLoggedIn(), (req, res, next) => {
 
 });
 
-
 router.get("/:id", (req, res, next) => {
   Group.findById(req.params.id).populate('plans')
     .then((group) => {

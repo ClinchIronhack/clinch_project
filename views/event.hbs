@@ -7,8 +7,12 @@
 <br><br>
 <p>Votes so far: {{votes.length}}</p>
 
-<form action="/group/{{group._id}}" method="POST" >
 <input type="hidden" name="_id" value={{_id}}>
+<form action="/group/{{group._id}}" method="POST" >
+<p>{{location.coordinates.[0]}}</p>
+<p>{{location.coordinates.[1]}}</p>
+<input type="hidden" class="coords" name="lat" value={{location.coordinates}}>
+{{!-- <input type="hidden" class="lng" name="lng" value={{location.coordinates.[1]}}> --}}
 <br><br>
 
 <button>vote</button>
