@@ -1,22 +1,29 @@
+<section class="login-signup">
+<h1>CLINCH</h1>
+<h2>Let's finally decide where to go!</h2>
+<div class="form">
 <form action="/auth/signup" method="POST" >
-
+<label for="username">Username
   <input id="username" type="text" name="username" placeholder="username">
-
-  <br>
+</label>
+ <label for="email">Email
   <input id="email" type="text" name="email" placeholder="email">
-  <br>
-
+</label>
+<label for="password">Password
   <input id="password" type="password" name="password" placeholder="password">
-
+</label>
   {{#if message }}
   <div class="error-message">{{ message }}</div>
   {{/if}}
 
-  <br><br>
 
-  <button>Sign Up</button>
+  <button class="button blue-back">Sign Up</button>
 
 
-  <a href="/auth/login">Already registered? Log In Here</a>
+  
 
 </form>
+<a href="/auth/login">Already registered? <span class="blue">Log In</span> Here</a>
+</div>
+
+</section>

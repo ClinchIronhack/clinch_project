@@ -84,7 +84,7 @@ router.get("/profile", ensureLogin.ensureLoggedIn(),(req, res, next) => {
     {let data = user.groups;
       // res.json(data)
       res.render("auth/profile", {
-        data
+        data, user
       })
     }
     );

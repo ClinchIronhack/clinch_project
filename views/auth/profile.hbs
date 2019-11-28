@@ -1,13 +1,30 @@
-{{#each data}}
-<div class="groupDescription">
-    
-  <h2><a href="/group/{{_id}}">{{name}}</a></h2>
-  <img src="{{image}}" alt="">
+<header>
+  <nav>
+    <ul>
+      <li><h4>CLINCH</h4></li>
+      <li><a href="/auth/logout">
+        Log Out</a></li>
+    </ul>
+  </nav>
+</header>
+<section class="main">
+  <div class="profile">
+<h3>{{user.username}}</h3>
+<h5>Your pending choices</h5>
+</div>
 
+<div class="card">
+{{#each data}}
+<div class="group-description">
+ <div class="wrapper">
+    <h6><a href="/group/{{_id}}">{{name}}</a></h6>
   <p>{{dateEvent}}</p>
+ </div>
+  <img src="{{image}}" alt="">
 </div>
 {{/each}}
-<br><br>
-<a href="/group/new">Crear Evento</a> 
-<br><br>
-<a href="/auth/logout">Logout</a>
+</div>
+<div class="center">
+<button class="button blue-back short"><a href="/group/new">Add event</a> </button>
+</div>
+</section>

@@ -73,7 +73,7 @@ app.locals.title = 'CLINCH';
 
 // Enable authentication using session + passport
 app.use(session({
-  secret: 'no more whtasapp infinite chains again',
+  secret: 'no more whatsapp infinite chains again',
   resave: true,
   saveUninitialized: true,
   //cookie: { maxAge: 600000 },

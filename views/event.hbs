@@ -1,29 +1,40 @@
-<h1>{{group.name}}</h1>
-<br><br>
-<aside>
+<header>
+  <nav>
+      <h4>CLINCH</h4>
+    <ul>
+      <li><a href="/auth/profile">
+        Back</a></li>
+       <li><a href="/auth/logout">
+        Log Out</a></li>
+    </ul>
+  </nav>
+</header>
+<section class="main">
+<div class="profile">
+<h3>{{group.name}}</h3>
+<h5>Where should we go?</h5>
+</div>
+
+<aside class="votes">
     {{#each group.plans}}
-    <h3><a href="/group/{{group}}/plan/{{_id}}">{{name}}</a></h3>
-    <br><br>
-    <p>Votes so far: {{votes.length}}</p>
+    <div class="list">
+    <h6><a href="/group/{{group}}/plan/{{_id}}">{{name}}</a></h6>
+    <p>Votes  {{votes.length}}</p>
 
     
     <form action="/group/{{group}}" method="POST">
         <input type="hidden" name="_id" value={{_id}}>
-        <input type="hidden" class="coords" name="lat" value={{location.coordinates}}>
-        
-        {{!-- <input type="hidden" class="lng" name="lng" value={{location.coordinates.[1]}}> --}}
-        <br><br>
+        <input type="hidden" class="coords" name="{{name}}" value={{location.coordinates}}>
         <button>vote</button>
     </form>
+    </div>
     {{/each}}
 </aside>
-<br><br>
-
 <div id="groupMap"></div>
-<br><br>
-
+<div>
 <a href="/group/{{group._id}}/plan/new-plan"><button>Propose a Plan</button></a>
-
+</div>
+</section>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCyXhe0Py7ZQkmgfZrEFF_jbnnaJMT9e_s"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
 <script type="text/javascript" src="/javascripts/eventMap.js"></script>
