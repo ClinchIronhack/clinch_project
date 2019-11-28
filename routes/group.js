@@ -13,54 +13,60 @@ const ensureLogin = require("connect-ensure-login");
 router.get("/new", ensureLogin.ensureLoggedIn(), (req, res, next) => {
   let owner = req.user
   User.find()
-  .then((users)=>{
-    // res.json({users, owner})
-    res.render('createEvent', {users, owner
-  })
-});
-});
-
-router.post("/new", ensureLogin.ensureLoggedIn(), (req, res, next) => {
-  // let body = req.body
-  // res.json({body})
-  
-  Group.create(req.body)
-    .then((group) => {
-      console.log(group._id);
-      console.log(req.user._id);
-      return User.findByIdAndUpdate({
-        _id: req.user._id
-      }, {
-        $push: {
-          groups: group._id
-        }
-      })
-      console.log('a')
-    })
-    // push group in users array:
-    
-    // .then(()=>{
-    //   User.find(req.body.users)
-    // })
-    .then(() => res.redirect('/auth/profile'))
-
-});
-
-
-router.get("/:id", ensureLogin.ensureLoggedIn("auth/login"), (req, res, next) => {
-  Group.findById(req.params.id).populate('plans')
-    .then(group => {
-      // res.json({group})
-      res.render('event', {
-        group
+    .then((users) => {
+      // res.json({users, owner})
+      res.render('createEvent', {
+        users,
+        owner
       })
     });
 });
 
-router.post("/:id", ensureLogin.ensureLoggedIn("auth/login"), (req, res, next) => {
+router.post("/new", ensureLogin.ensureLoggedIn(), (req, res, next) => {
+  let body = req.body
+  // res.json(body)
+  Group.create(req.body)
+    .then((group) => {
+      body.users.forEach(user => {
+        return User.findByIdAndUpdate({
+          _id: user
+        }, {
+          $push: {
+            groups: group._id
+          }
+        }).then(groupAdd => console.log(groupAdd))
+
+      })
+    })
+    .then(() => res.redirect('/auth/profile'))
+
+});
+
+router.get("/:id", (req, res, next) => {
+  Group.findById(req.params.id).populate('plans')
+    .then((group) => {
+      // res.json(group)
+      group.plans.sort((a, b) => {
+        return (b.votes.length) - (a.votes.length);
+      })
+      // res.json({
+      //   group
+      // })
+      res.render('event', {
+        group
+      })
+    })
+    .catch(error => {
+      console.log(error);
+    });
+})
+
+//esto esta roto
+router.post("/:id", (req, res, next) => {
   let user = req.user
   let paramsOL = req.params
   let bodyOL = req.body
+  // console.log(user, paramsOL.id, bodyOL);
 
   Group.findById(paramsOL._id).populate({
       path: 'plans',
@@ -74,12 +80,12 @@ router.post("/:id", ensureLogin.ensureLoggedIn("auth/login"), (req, res, next) =
       if (group !== null && group.plans.length > 0) {
         let planId = group.plans[0]._id;
         return Plan.findByIdAndUpdate({
-          _id: planId
-        }, {
-          $pull: {
-            votes: user._id
-          }
-        })
+            _id: planId
+          }, {
+            $pull: {
+              votes: user._id
+            }
+          })
           .then(() => Plan.updateOne({
             _id: bodyOL._id
           }, {
@@ -98,9 +104,11 @@ router.post("/:id", ensureLogin.ensureLoggedIn("auth/login"), (req, res, next) =
       }
     })
     .then(() =>
-      res.redirect(`/group/${req.params.id}`)
+      res.redirect(`/group/${req.params._id}`)
     )
-
+    .catch(error => {
+      console.log(error);
+    })
 });
 
 
