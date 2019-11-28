@@ -64,11 +64,10 @@ router.get("/:id", (req, res, next) => {
 //esto esta roto
 router.post("/:id", (req, res, next) => {
   let user = req.user
-  let paramsOL = req.params
+  let groupId = req.params.id
   let bodyOL = req.body
-  // console.log(user, paramsOL.id, bodyOL);
 
-  Group.findById(paramsOL._id).populate({
+  Group.findById(groupId).populate({
       path: 'plans',
       match: {
         votes: {
@@ -104,7 +103,7 @@ router.post("/:id", (req, res, next) => {
       }
     })
     .then(() =>
-      res.redirect(`/group/${req.params._id}`)
+      res.redirect(`/group/${req.params.id}`)
     )
     .catch(error => {
       console.log(error);
