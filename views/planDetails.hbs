@@ -13,14 +13,16 @@
 <h3>{{plan.name}}</h3>
 <br><br>
 <p><span class="bold">Why</span>{{plan.description}}</p> 
+<br>
 <p><span class="bold">Where</span> {{plan.address}}</p>
+<br>
 <p><span class="bold">Votes</span> {{plan.numVotes}}</p>
 
 <input id="lat" type="hidden" value={{plan.location0}}>
 <input id="lng" type="hidden" value={{plan.location1}}>
 
 <div class="split">
-    <a href="{{plan._id}}/edit"> <button class="button small short orange-back"type="submit">Update Plan</button></a>
+    <a href="{{plan._id}}/edit"> <button class="button small short blue-back"type="submit">Update Plan</button></a>
 <a href="{{plan._id}}/delete"> <button class="button small short delete" type="submit">Delete Plan</button></a>
 
 </div>

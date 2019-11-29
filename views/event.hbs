@@ -12,6 +12,7 @@
 <section class="main">
     <div class="profile">
         <h3>{{group.name}}</h3>
+        <br>
         <h5>Where should we go?</h5>
     </div>
     <div class="card card2">
@@ -24,13 +25,13 @@
                     <form action="/group/{{group}}" method="POST">
                         <input type="hidden" name="_id" value={{_id}}>
                         <input type="hidden" class="coords" name="{{name}}" value={{location.coordinates}}>
-                        <button class="button orange-back short small">vote</button>
+                        <button class="buttonVote orange-back short small">vote</button>
                     </form>
                 </div>
             </div>
             {{/each}}
             <div class="center">
-        <a href="/group/{{group._id}}/plan/new-plan"><button class="button blue-back">Propose a Plan</button></a>
+        <a href="/group/{{group._id}}/plan/new-plan"><button class="button blue-back small">Propose a Plan</button></a>
     </div>
         </aside>
         <div id="groupMap"></div>
