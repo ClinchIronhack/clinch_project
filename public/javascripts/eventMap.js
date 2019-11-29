@@ -2,8 +2,7 @@
 
 window.onload = () => {
     startMap();
-    // getMarkers();
-    // placePlans();
+    selectWinner();
 
 }
 
@@ -35,49 +34,9 @@ function startMap() {
     placePlans();
 }
 
-
-// function getMarkers() {
-//     console.log("holaaaaaaaa")
-//     console.log(document.querySelectorAll(".coords"))
-//     // const newPlace = {
-    //     lat: document.getElementById('lat').value,
-    //     lng: document.getElementById('lng').value
-//     // };
-
-
-    // document.querySelectorAll(".lat").forEach((el)=>{
-        
-    //     console.log(el.name)
-    // })
-
-    // let coords =Array.from(document.querySelectorAll(".lat")).map((el,idx)=>{
-    //     ({lat:Array.from(document.querySelectorAll(".lat"))[idx].value , lng:Array.from(document.querySelectorAll(".long"))[idx].value})
-    // })
-
-    // console.log(coords)
-
-    // plansMarkers.push(newPlace)
-    // console.log(newPlace)
-    // console.log(plansMarkers)
-    // placePlans(plansMarkers)
-
-    // document.querySelectorAll('.coords')
-    //  .then( response => {
-    //    placePlans(response.data.plans);
-    //  })
-
-// }
-
 function placePlans() {
 
     document.querySelectorAll(".coords").forEach((marker)=> {
-        
-        // const center = {
-        //     lat: document.getElementById('lat').value,
-        //     lng: document.getElementById('lng').value
-
-        // };
-        // console.log(center)
         new google.maps.Marker({
             position: {
                 lat: +marker.value.split(',')[0],
@@ -86,6 +45,13 @@ function placePlans() {
             map: groupMap,
             title: marker.name
         });
-        //   pins.push(pin);
+        
     });
+}
+
+
+
+function selectWinner(){
+    let plan= document.getElementsByClassName('.list');
+    plan.style.border='1rem , solid, #ff794f'
 }

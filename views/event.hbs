@@ -25,7 +25,9 @@
                     <form action="/group/{{group}}" method="POST">
                         <input type="hidden" name="_id" value={{_id}}>
                         <input type="hidden" class="coords" name="{{name}}" value={{location.coordinates}}>
+                        {{#if notVotedThisPlan}}
                         <button class="buttonVote orange-back short small">vote</button>
+                        {{/if}}
                     </form>
                 </div>
             </div>
@@ -40,4 +42,5 @@
 </section>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCyXhe0Py7ZQkmgfZrEFF_jbnnaJMT9e_s"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
+<script type="text/javascript" src="/javascripts/winnerPlan.js"></script>
 <script type="text/javascript" src="/javascripts/eventMap.js"></script>

@@ -44,15 +44,24 @@ router.post("/new", ensureLogin.ensureLoggedIn(), (req, res, next) => {
 });
 
 router.get("/:id", (req, res, next) => {
-  Group.findById(req.params.id).populate('plans')
+  Group.findById(req.params.id).populate('plans').lean()
     .then((group) => {
       // res.json(group)
       group.plans.sort((a, b) => {
         return (b.votes.length) - (a.votes.length);
       })
-      // res.json({
-      //   group
-      // })
+
+      group.plans = group.plans.map(plan => {
+        plan.votes = plan.votes.map(id => id.toString())
+
+        return {
+          ...plan,
+          notVotedThisPlan: !plan.votes.includes(req.user._id.toString())
+        }
+      })
+
+      console.log("my user id is", req.user._id)
+
       res.render('event', {
         group
       })

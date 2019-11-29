@@ -433,4 +433,7 @@ h5 {
   font-size: 0.7rem;
   letter-spacing: 0.1em; }
 
+.votes div:first-child {
+  border: 0.6rem solid #ff794f !important; }
+
 /*# sourceMappingURL=style.css.map */
