@@ -1,4 +1,4 @@
-#CLINCH 
+# CLINCH 
 
 ![logo](https://res.cloudinary.com/flor-i-ronhack/image/upload/c_scale,h_60/v1575028909/clinch/clinch-01_quhhcu.png)
 
@@ -9,7 +9,7 @@ Esta aplicación está pensada para resolver los problemas que surgen en el mome
 **Prueba la app en**  [Clinch]( https://clinch-ironhack.herokuapp.com)
 
 
-##Cómo funciona
+## Cómo funciona
 
 + Es imprescindible registrarse para poder utilizar la app.
 + En tu página de perfil aparecerá una lista de todos los eventos en los que participas, con su fecha propuesta y la fecha límite para votar.
@@ -19,13 +19,13 @@ Esta aplicación está pensada para resolver los problemas que surgen en el mome
 + Si clicas en el nombre del plan, verás sus detalles completos y su localización, para que puedas tomar tu decisión.
 + Los planes aparecerán siempre ordenados por número de votos, de forma que sepas claramente qué propuesta es la más votada en cada momento.
 
-###Futuras implementaciones
+### Futuras implementaciones
 
 + Posibilidad de invitar a amigos que no estén registrados.
 + Alerta de cierre de votación.
 + Posibilidad de ver el itinerario desde tu ubicación hasta la ubicación del plan propuesto.
 
-##Construido con
+## Construido con
 
 + ExpressJS
 + MongoDB
@@ -37,7 +37,7 @@ Esta aplicación está pensada para resolver los problemas que surgen en el mome
 + API Google Maps y Places
 + Desplegado en Heroku 
 
-##Autoras
+## Autoras
 
 + Sonia Cáceres Benítez
 [github](https://github.com/soniacb88)
