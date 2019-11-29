@@ -230,7 +230,6 @@ a {
   color: $color-white;
   border: none;
   border-radius: none;
-  margin: 1.3rem 0;
   padding: .4rem .5rem;
   width: 100%;
   font-size: .8rem;
@@ -324,6 +323,10 @@ h5 {
 
 .profile {
   margin-bottom: 2rem;
+  p{
+    color: #666;
+    font-size: .9rem;
+  }
 }
 
 .card {
@@ -399,6 +402,7 @@ h5 {
     font-size: 1rem;
     line-height:1.2rem;
     text-transform: uppercase;
+    margin-bottom: 1rem;
     
     a {
       color: $color-dark-orange;
@@ -559,5 +563,9 @@ h5 {
 
 
 .votes div:first-child {
-  border: .6rem solid $color-orange !important;
+  a{
+    // color: $color-blue;
+    font-weight: 700;
+  }
+  border: .3rem solid $color-orange !important;
 }

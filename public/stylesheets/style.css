@@ -192,7 +192,6 @@ a {
   color: #f8f5f2;
   border: none;
   border-radius: none;
-  margin: 1.3rem 0;
   padding: .4rem .5rem;
   width: 100%;
   font-size: .8rem;
@@ -265,6 +264,9 @@ h5 {
 
 .profile {
   margin-bottom: 2rem; }
+  .profile p {
+    color: #666;
+    font-size: .9rem; }
 
 .card {
   display: flex;
@@ -320,7 +322,8 @@ h5 {
   .list h6 {
     font-size: 1rem;
     line-height: 1.2rem;
-    text-transform: uppercase; }
+    text-transform: uppercase;
+    margin-bottom: 1rem; }
     .list h6 a {
       color: #fe5133;
       letter-spacing: 0.1em;
@@ -434,6 +437,8 @@ h5 {
   letter-spacing: 0.1em; }
 
 .votes div:first-child {
-  border: 0.6rem solid #ff794f !important; }
+  border: 0.3rem solid #ff794f !important; }
+  .votes div:first-child a {
+    font-weight: 700; }
 
 /*# sourceMappingURL=style.css.map */
