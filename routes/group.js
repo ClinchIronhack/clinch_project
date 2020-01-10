@@ -29,12 +29,7 @@ router.post("/new", ensureLogin.ensureLoggedIn(), (req, res, next) => {
   Group.create(req.body)
     .then((group) => {
       body.users.forEach(user => {
-        return User.findByIdAndUpdate({
-          _id: user
-        }, {
-          $push: {
-            groups: group._id
-          }
+        return User.findByIdAndUpdate({ _id: user }, {$push: { groups: group._id  }
         }).then(groupAdd => console.log(groupAdd))
 
       })

@@ -42,28 +42,6 @@ router.post("/new-plan", (req, res, next) => {
     console.log('description:' + description)
     console.log('address:' + address)
     console.log('owner:' + name)
-    //const photo = req.body.photo;
-
-    // if (name === "" || description === "" || address === "" || location === "") {
-    //     res.render("new-plan", {
-    //         message: "Please, complete all the fields"
-    //     });
-    //     return;
-    // }
-
-    // if (!req.photo) {
-    //     res.render("new-plan", {
-    //         message: "Please, upload a photo"
-    //     });
-    //     return;
-    // }
-
-    // if (latitude === "" || longitude === "") {
-    //     res.render("new-plan", {
-    //         message: "Please, specify a valid address"
-    //     });
-    //     return;
-    // }
 
     const newPlan = new Plan({
         name,
@@ -102,20 +80,11 @@ router.get("/:planId", (req, res, next) => {
 
 
 router.get("/:planId/edit", (req, res, next) => {
-    //router.get("/:planId/edit", ensureLogin.ensureLoggedIn("auth/login"), (req, res, next) => {
-    console.log
-    // if (req.user) {
-    //     console.log('Sesión Activa, hay user')
-    //     const owner = req.user.id
-    // }
     let groupId = req.params.groupId
     let planId = req.params.planId
 
     Plan.findById(planId)
         .then(plan => {
-            // if (owner !== plan.owner) {
-            //     res.redirect(`/:${req.params.id}/edit`)
-            // }
             plan.location0 = JSON.stringify(plan.location.coordinates[0])
             plan.location1 = JSON.stringify(plan.location.coordinates[1])
             res.render("edit-plan", {
@@ -134,7 +103,6 @@ router.post("/:planId/edit", (req, res, next) => {
         latitude,
         longitude
     } = req.body
-    //const owner = req.user.id
     Plan.findByIdAndUpdate(req.params.planId, {
         name,
         description,
@@ -143,12 +111,8 @@ router.post("/:planId/edit", (req, res, next) => {
             type: "Point",
             coordinates: [latitude, longitude]
         }
-        //owner
     })
         .then(() =>
-            // res.json({
-            //     idgrupo
-            // })
             res.redirect(`/group/${req.params.groupId}`)
         )
         .catch(err => console.log(err))
